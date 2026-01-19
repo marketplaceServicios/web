@@ -1,0 +1,35 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --primary: #E86C25;
+  --primary-foreground: #FFFFFF;
+  --forest: #1B4332;
+  --forest-foreground: #FFFFFF;
+  --cream: #F5F1EB;
+  --background: #F5F1EB;
+  --foreground: #1A1A1A;
+  --muted: #6B7280;
+  --border: #E5E7EB;
+  --radius: 0.5rem;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: 'Inter', system-ui, sans-serif;
+  background-color: var(--cream);
+  color: var(--foreground);
+  line-height: 1.6;
+}
+
+@layer components {
+  .container {
+    @apply max-w-7xl mx-auto px-4 sm:px-6 lg:px-8;
+  }
+}
