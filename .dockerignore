@@ -7,7 +7,5 @@ build
 .env*
 .vscode
 .idea
-Dockerfile
 docker-compose*.yml
-nginx.conf
 *.txt
