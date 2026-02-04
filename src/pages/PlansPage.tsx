@@ -35,17 +35,17 @@ export default function PlansPage() {
                 : "url('https://images.unsplash.com/photo-1507525428034-b723cf961d3e?w=1920')",
           }}
         >
-          <div className="absolute inset-0 bg-black/50" />
+          <div className="absolute inset-0 bg-primary/60" />
         </div>
         <div className="relative container h-full flex items-center justify-center">
           <div className="text-center">
-            <h1 className="text-4xl md:text-5xl font-bold text-white mb-4">
+            <h1 className="text-4xl md:text-5xl font-serif font-bold text-white mb-4">
               {categoryId === "all"
-                ? "Escapa a la aventura!"
-                : `Planes de ${currentCategory?.name || "Viaje"}`}
+                ? "Descubre experiencias únicas"
+                : `Experiencias de ${currentCategory?.name || "Viaje"}`}
             </h1>
-            <p className="text-lg text-white/90">
-              Descubre los mejores destinos para tu próximo viaje
+            <p className="text-lg text-cream/90">
+              Momentos diseñados para quienes valoran el tiempo
             </p>
           </div>
         </div>
@@ -63,8 +63,8 @@ export default function PlansPage() {
                   onClick={() => handleCategoryChange(category.id)}
                   className={`px-4 py-2 rounded-full text-sm font-medium transition-colors ${
                     categoryId === category.id
-                      ? "bg-primary text-white"
-                      : "bg-white text-gray-700 hover:bg-gray-100"
+                      ? "bg-golden text-white"
+                      : "bg-white text-primary hover:bg-sage hover:text-white"
                   }`}
                 >
                   {category.name}
@@ -75,11 +75,11 @@ export default function PlansPage() {
 
           {/* Plans Count */}
           <div className="mb-6">
-            <p className="text-gray-600">
-              <span className="font-semibold text-forest">
+            <p className="text-stormy">
+              <span className="font-semibold text-primary">
                 {filteredPlans.length}
               </span>{" "}
-              planes disponibles
+              experiencias disponibles
             </p>
           </div>
 

@@ -18,16 +18,16 @@ export default function HeroBanner() {
       {/* Content */}
       <div className="relative container h-full flex flex-col justify-center">
         <div className="max-w-xl">
-          <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-4">
-            Encuentra tu viaje perfecto
+          <h1 className="text-4xl md:text-5xl lg:text-6xl font-serif font-bold text-white mb-4">
+            Experiencias que se sienten propias
           </h1>
           <p className="text-lg md:text-xl text-white/90 mb-8">
-            Descubre los destinos más increíbles de Colombia con los mejores
-            planes y experiencias únicas.
+            Diseñamos experiencias para quienes prefieren comprender antes de decidir.
+            Momentos cuidados y memorables te esperan.
           </p>
           <Link to="/planes">
             <Button size="lg" className="text-lg px-8">
-              Explorar planes
+              Descubrir experiencias
             </Button>
           </Link>
         </div>

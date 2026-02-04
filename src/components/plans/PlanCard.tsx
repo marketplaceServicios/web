@@ -29,8 +29,8 @@ export default function PlanCard({ plan, highlighted = false }: PlanCardProps) {
     <Card
       className={`overflow-hidden hover:shadow-lg transition-all ${
         highlighted
-          ? "border-2 border-forest ring-2 ring-forest/20"
-          : "border-2 border-transparent hover:border-primary"
+          ? "border-2 border-golden ring-2 ring-golden/20"
+          : "border-2 border-transparent hover:border-golden"
       }`}
     >
       {/* Image */}
@@ -41,26 +41,26 @@ export default function PlanCard({ plan, highlighted = false }: PlanCardProps) {
           className="w-full h-full object-cover"
         />
         {plan.isOffer && (
-          <div className="absolute top-3 right-3 bg-primary text-white px-3 py-1 rounded-full text-xs font-semibold">
+          <div className="absolute top-3 right-3 bg-golden text-white px-3 py-1 rounded-full text-xs font-semibold">
             OFERTA
           </div>
         )}
         {highlighted && (
-          <div className="absolute top-3 left-3 bg-forest text-white px-3 py-1 rounded-full text-xs font-semibold">
+          <div className="absolute top-3 left-3 bg-sage text-white px-3 py-1 rounded-full text-xs font-semibold">
             DESTACADO
           </div>
         )}
       </div>
 
       <CardContent className="p-5">
-        <h3 className="text-xl font-semibold text-forest mb-2">{plan.title}</h3>
+        <h3 className="text-xl font-serif font-semibold text-primary mb-2">{plan.title}</h3>
 
         <div className="space-y-2 mb-4">
-          <div className="flex items-center text-gray-500 text-sm">
+          <div className="flex items-center text-stormy text-sm">
             <MapPin className="w-4 h-4 mr-2 flex-shrink-0" />
             <span className="truncate">{plan.location}</span>
           </div>
-          <div className="flex items-center text-gray-500 text-sm">
+          <div className="flex items-center text-stormy text-sm">
             <Calendar className="w-4 h-4 mr-2 flex-shrink-0" />
             <span>
               {formatDate(plan.startDate)} - {formatDate(plan.endDate)}
@@ -71,14 +71,14 @@ export default function PlanCard({ plan, highlighted = false }: PlanCardProps) {
         <div className="flex items-center justify-between">
           <div>
             {plan.originalPrice && (
-              <span className="text-sm text-gray-400 line-through block">
+              <span className="text-sm text-stormy/60 line-through block">
                 {formatPrice(plan.originalPrice)}
               </span>
             )}
-            <span className="text-xl font-bold text-primary">
+            <span className="text-xl font-bold text-golden">
               {formatPrice(plan.price)}
             </span>
-            <span className="text-sm text-gray-500 ml-1">/ persona</span>
+            <span className="text-sm text-stormy ml-1">/ persona</span>
           </div>
           <Link to={`/planes/${plan.id}`}>
             <Button size="sm">Ver</Button>

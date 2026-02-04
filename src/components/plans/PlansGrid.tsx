@@ -9,8 +9,8 @@ export default function PlansGrid({ plans }: PlansGridProps) {
   if (plans.length === 0) {
     return (
       <div className="text-center py-12">
-        <p className="text-gray-500 text-lg">
-          No se encontraron planes en esta categoría.
+        <p className="text-stormy text-lg">
+          No se encontraron experiencias en esta categoría.
         </p>
       </div>
     );
