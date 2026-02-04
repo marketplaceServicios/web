@@ -7,11 +7,11 @@ export default function Testimonials() {
     <section className="py-16 bg-white">
       <div className="container">
         <div className="text-center mb-10">
-          <h2 className="text-3xl font-bold text-forest mb-2">
-            Lo que dicen nuestros viajeros
+          <h2 className="text-3xl font-serif font-bold text-primary mb-2">
+            Lo que dicen quienes ya vivieron la experiencia
           </h2>
-          <p className="text-gray-600">
-            Experiencias reales de quienes ya viajaron con nosotros
+          <p className="text-stormy">
+            Testimonios de momentos que permanecen en la memoria
           </p>
         </div>
 
@@ -20,10 +20,10 @@ export default function Testimonials() {
             <Card key={testimonial.id} className="relative">
               <CardContent className="p-6">
                 {/* Quote Icon */}
-                <Quote className="w-10 h-10 text-primary/20 mb-4" />
+                <Quote className="w-10 h-10 text-sage/30 mb-4" />
 
                 {/* Text */}
-                <p className="text-gray-700 mb-6 italic">
+                <p className="text-gray-700 mb-6 italic font-serif">
                   "{testimonial.text}"
                 </p>
 
@@ -35,7 +35,7 @@ export default function Testimonials() {
                     className="w-12 h-12 rounded-full object-cover mr-4"
                   />
                   <div>
-                    <p className="font-semibold text-forest">
+                    <p className="font-semibold text-primary">
                       {testimonial.name}
                     </p>
                     <div className="flex items-center mt-1">
@@ -44,7 +44,7 @@ export default function Testimonials() {
                           key={i}
                           className={`w-4 h-4 ${
                             i < testimonial.rating
-                              ? "text-yellow-400 fill-yellow-400"
+                              ? "text-golden fill-golden"
                               : "text-gray-300"
                           }`}
                         />

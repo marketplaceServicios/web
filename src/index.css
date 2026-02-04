@@ -2,15 +2,81 @@
 @tailwind components;
 @tailwind utilities;
 
+/* Baskervville Font */
+@font-face {
+  font-family: 'Baskervville';
+  src: url('./assets/fonts/baskerville/Baskervville-VariableFont_wght.ttf') format('truetype');
+  font-weight: 100 900;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Baskervville';
+  src: url('./assets/fonts/baskerville/Baskervville-Italic-VariableFont_wght.ttf') format('truetype');
+  font-weight: 100 900;
+  font-style: italic;
+  font-display: swap;
+}
+
+/* Gilroy Font */
+@font-face {
+  font-family: 'Gilroy';
+  src: url('./assets/fonts/gilroy/Gilroy-Regular.ttf') format('truetype');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Gilroy';
+  src: url('./assets/fonts/gilroy/Gilroy-RegularItalic.ttf') format('truetype');
+  font-weight: 400;
+  font-style: italic;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Gilroy';
+  src: url('./assets/fonts/gilroy/Gilroy-Medium.ttf') format('truetype');
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Gilroy';
+  src: url('./assets/fonts/gilroy/Gilroy-SemiBold.ttf') format('truetype');
+  font-weight: 600;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Gilroy';
+  src: url('./assets/fonts/gilroy/Gilroy-Bold.ttf') format('truetype');
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Gilroy';
+  src: url('./assets/fonts/gilroy/Gilroy-BoldItalic.ttf') format('truetype');
+  font-weight: 700;
+  font-style: italic;
+  font-display: swap;
+}
+
 :root {
-  --primary: #E86C25;
+  --primary: #0e3441;
   --primary-foreground: #FFFFFF;
-  --forest: #1B4332;
+  --forest: #698461;
   --forest-foreground: #FFFFFF;
-  --cream: #F5F1EB;
-  --background: #F5F1EB;
-  --foreground: #1A1A1A;
-  --muted: #6B7280;
+  --cream: #fff2dd;
+  --background: #fff2dd;
+  --foreground: #0e3441;
+  --muted: #6e8893;
   --border: #E5E7EB;
   --radius: 0.5rem;
 }
@@ -22,7 +88,7 @@
 }
 
 body {
-  font-family: 'Inter', system-ui, sans-serif;
+  font-family: 'Gilroy', system-ui, sans-serif;
   background-color: var(--cream);
   color: var(--foreground);
   line-height: 1.6;

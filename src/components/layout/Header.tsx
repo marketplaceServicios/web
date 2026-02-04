@@ -3,6 +3,7 @@ import { Search, Menu, X } from "lucide-react";
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
+import logoHorizontal from "@/assets/logos/horizontal-azul.png";
 
 const navLinks = [
   { href: "/", label: "Inicio" },
@@ -19,10 +20,14 @@ export default function Header() {
   return (
     <header className="bg-white shadow-sm sticky top-0 z-50">
       <div className="container">
-        <div className="flex items-center justify-between h-16">
+        <div className="flex items-center justify-between h-28">
           {/* Logo */}
           <Link to="/" className="flex items-center">
-            <span className="text-2xl font-bold text-primary">Travel</span>
+            <img
+              src={logoHorizontal}
+              alt="Vive Silver"
+              className="h-24 w-auto"
+            />
           </Link>
 
           {/* Desktop Navigation */}
@@ -31,10 +36,10 @@ export default function Header() {
               <Link
                 key={link.href}
                 to={link.href}
-                className={`text-sm font-medium transition-colors hover:text-primary ${
+                className={`text-base font-medium transition-all duration-200 px-4 py-2 rounded-full ${
                   location.pathname === link.href
-                    ? "text-primary"
-                    : "text-gray-700"
+                    ? "text-white bg-primary"
+                    : "text-gray-700 hover:text-primary hover:bg-primary/10"
                 }`}
               >
                 {link.label}
@@ -110,10 +115,10 @@ export default function Header() {
                   key={link.href}
                   to={link.href}
                   onClick={() => setIsMenuOpen(false)}
-                  className={`px-2 py-2 text-sm font-medium transition-colors hover:text-primary ${
+                  className={`px-4 py-2 text-base font-medium transition-all duration-200 rounded-lg ${
                     location.pathname === link.href
-                      ? "text-primary"
-                      : "text-gray-700"
+                      ? "text-white bg-primary"
+                      : "text-gray-700 hover:text-primary hover:bg-primary/10"
                   }`}
                 >
                   {link.label}
