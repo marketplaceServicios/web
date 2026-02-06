@@ -15,5 +15,3 @@ jobs:
         with:
           api-key: ${{ vars.HOSTINGER_API_KEY }}
           virtual-machine: ${{ vars.HOSTINGER_VM_ID }}
-}}
-          personal-access-token: ${{ secrets.PERSONAL_ACCESS_TOKEN }}
