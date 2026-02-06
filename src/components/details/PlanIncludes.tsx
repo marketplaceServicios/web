@@ -33,11 +33,11 @@ export default function PlanIncludes({ plan }: PlanIncludesProps) {
 
       {/* Content */}
       <div className="p-6">
-        <h4 className="font-semibold text-forest mb-4">El plan incluye:</h4>
+        <h4 className="font-serif font-semibold text-primary mb-4">La experiencia incluye:</h4>
         <ul className="space-y-3 mb-6">
           {plan.includes.map((item, index) => (
             <li key={index} className="flex items-start gap-3">
-              <Check className="w-5 h-5 text-green-500 flex-shrink-0 mt-0.5" />
+              <Check className="w-5 h-5 text-sage flex-shrink-0 mt-0.5" />
               <span className="text-sm text-gray-700">{item}</span>
             </li>
           ))}
@@ -46,14 +46,14 @@ export default function PlanIncludes({ plan }: PlanIncludesProps) {
         {/* Price */}
         <div className="border-t pt-4 mb-4">
           <div className="flex items-baseline justify-between">
-            <span className="text-gray-600">Precio por persona</span>
+            <span className="text-stormy">Precio por persona</span>
             <div className="text-right">
               {plan.originalPrice && (
-                <span className="text-sm text-gray-400 line-through block">
+                <span className="text-sm text-stormy/60 line-through block">
                   {formatPrice(plan.originalPrice)}
                 </span>
               )}
-              <span className="text-2xl font-bold text-primary">
+              <span className="text-2xl font-bold text-golden">
                 {formatPrice(plan.price)}
               </span>
             </div>
@@ -63,7 +63,7 @@ export default function PlanIncludes({ plan }: PlanIncludesProps) {
         {/* CTA */}
         <Link to={`/reserva/${plan.id}`}>
           <Button className="w-full" size="lg">
-            Reserva ahora
+            Reservar experiencia
           </Button>
         </Link>
       </div>

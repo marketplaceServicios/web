@@ -9,15 +9,19 @@ const buttonVariants = cva(
     variants: {
       variant: {
         default:
-          "bg-primary text-white hover:bg-primary-600 focus-visible:ring-primary",
+          "bg-golden text-white hover:bg-golden-600 focus-visible:ring-golden",
         secondary:
-          "bg-forest text-white hover:bg-forest-600 focus-visible:ring-forest",
+          "bg-primary text-white hover:bg-primary-600 focus-visible:ring-primary",
         outline:
           "border-2 border-primary text-primary bg-transparent hover:bg-primary hover:text-white",
         ghost:
-          "hover:bg-cream-300 hover:text-forest",
+          "hover:bg-cream-300 hover:text-primary",
         link:
-          "text-primary underline-offset-4 hover:underline",
+          "text-golden underline-offset-4 hover:underline",
+        sage:
+          "bg-sage text-white hover:bg-sage-600 focus-visible:ring-sage",
+        forest:
+          "bg-forest text-white hover:bg-forest-600 focus-visible:ring-forest",
       },
       size: {
         default: "h-10 px-4 py-2",

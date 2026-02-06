@@ -65,8 +65,8 @@ export default function ReservationPage() {
   return (
     <div className="bg-cream min-h-screen py-8">
       <div className="container">
-        <h1 className="text-3xl font-bold text-forest mb-8">
-          Reservar plan {plan.title}
+        <h1 className="text-3xl font-serif font-bold text-primary mb-8">
+          Reservar experiencia: {plan.title}
         </h1>
 
         <div className="grid lg:grid-cols-3 gap-8">
@@ -76,10 +76,10 @@ export default function ReservationPage() {
             <div className="bg-white rounded-xl p-6 border">
               <div className="flex items-center justify-between">
                 <div>
-                  <h3 className="font-semibold text-forest">
+                  <h3 className="font-semibold text-primary">
                     Número de viajeros
                   </h3>
-                  <p className="text-sm text-gray-500">
+                  <p className="text-sm text-stormy">
                     Selecciona la cantidad de personas
                   </p>
                 </div>
@@ -92,7 +92,7 @@ export default function ReservationPage() {
                   >
                     <Minus className="w-4 h-4" />
                   </Button>
-                  <span className="text-2xl font-bold text-forest w-8 text-center">
+                  <span className="text-2xl font-bold text-primary w-8 text-center">
                     {numTourists}
                   </span>
                   <Button

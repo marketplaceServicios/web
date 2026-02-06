@@ -19,11 +19,11 @@ export default function PopularPlans() {
     <section className="py-16 bg-cream">
       <div className="container">
         <div className="text-center mb-10">
-          <h2 className="text-3xl font-bold text-forest mb-2">
-            Planes populares
+          <h2 className="text-3xl font-serif font-bold text-primary mb-2">
+            Experiencias populares
           </h2>
-          <p className="text-gray-600">
-            Los destinos más elegidos por nuestros viajeros
+          <p className="text-stormy">
+            Momentos elegidos por quienes saben distinguir lo verdaderamente importante
           </p>
         </div>
 
@@ -31,7 +31,7 @@ export default function PopularPlans() {
           {plans.map((plan) => (
             <Card
               key={plan.id}
-              className="overflow-hidden hover:shadow-lg transition-shadow border-2 border-transparent hover:border-primary"
+              className="overflow-hidden hover:shadow-lg transition-shadow border-2 border-transparent hover:border-golden"
             >
               {/* Image */}
               <div className="relative h-48">
@@ -40,17 +40,17 @@ export default function PopularPlans() {
                   alt={plan.title}
                   className="w-full h-full object-cover"
                 />
-                <div className="absolute top-3 left-3 bg-forest text-white px-3 py-1 rounded-full text-xs font-medium">
+                <div className="absolute top-3 left-3 bg-sage text-white px-3 py-1 rounded-full text-xs font-medium">
                   {plan.category}
                 </div>
               </div>
 
               <CardContent className="p-5">
-                <h3 className="text-xl font-semibold text-forest mb-2">
+                <h3 className="text-xl font-serif font-semibold text-primary mb-2">
                   {plan.title}
                 </h3>
 
-                <div className="flex items-center text-gray-500 text-sm mb-3">
+                <div className="flex items-center text-stormy text-sm mb-3">
                   <MapPin className="w-4 h-4 mr-1" />
                   <span>{plan.location}</span>
                 </div>
@@ -62,21 +62,21 @@ export default function PopularPlans() {
                         key={i}
                         className={`w-4 h-4 ${
                           i < Math.floor(plan.rating)
-                            ? "text-yellow-400 fill-yellow-400"
+                            ? "text-golden fill-golden"
                             : "text-gray-300"
                         }`}
                       />
                     ))}
                   </div>
-                  <span className="ml-2 text-sm text-gray-600">
+                  <span className="ml-2 text-sm text-stormy">
                     ({plan.reviews} reseñas)
                   </span>
                 </div>
 
                 <div className="flex items-center justify-between">
                   <div>
-                    <span className="text-sm text-gray-500">Desde</span>
-                    <p className="text-xl font-bold text-primary">
+                    <span className="text-sm text-stormy">Desde</span>
+                    <p className="text-xl font-bold text-golden">
                       {formatPrice(plan.price)}
                     </p>
                   </div>
@@ -94,7 +94,7 @@ export default function PopularPlans() {
         <div className="text-center mt-10">
           <Link to="/planes">
             <Button size="lg" variant="secondary">
-              Ver todos los planes
+              Ver todas las experiencias
             </Button>
           </Link>
         </div>

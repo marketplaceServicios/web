@@ -23,17 +23,17 @@ export default function DetailsPage() {
           className="absolute inset-0 bg-cover bg-center"
           style={{ backgroundImage: `url(${plan.image})` }}
         >
-          <div className="absolute inset-0 bg-black/50" />
+          <div className="absolute inset-0 bg-primary/60" />
         </div>
         <div className="relative container h-full flex items-center">
           <div>
-            <span className="inline-block bg-primary text-white px-3 py-1 rounded-full text-sm font-medium mb-2">
+            <span className="inline-block bg-sage text-white px-3 py-1 rounded-full text-sm font-medium mb-2">
               {plan.category}
             </span>
-            <h1 className="text-3xl md:text-4xl font-bold text-white">
+            <h1 className="text-3xl md:text-4xl font-serif font-bold text-white">
               {plan.title}
             </h1>
-            <p className="text-white/80">{plan.location}</p>
+            <p className="text-cream/80">{plan.location}</p>
           </div>
         </div>
       </section>
