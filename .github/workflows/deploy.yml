@@ -1,4 +1,4 @@
-name: Deploy to VPS
+name: Deploy to Hostinger
 
 on:
   push:
@@ -8,14 +8,11 @@ jobs:
   deploy:
     runs-on: ubuntu-latest
     steps:
-      - name: Deploy to VPS via SSH
-        uses: appleboy/ssh-action@v1
+      - uses: actions/checkout@v4
+
+      - name: Deploy to Hostinger
+        uses: hostinger/deploy-action@v1
         with:
-          host: ${{ secrets.VPS_HOST }}
-          username: ${{ secrets.VPS_USER }}
-          key: ${{ secrets.VPS_SSH_KEY }}
-          script: |
-            cd /opt/vive-silver/web
-            git pull
-            docker compose up -d --build
-            docker image prune -f
+          api-key: ${{ secrets.HOSTINGER_API_KEY }}
+          virtual-machine: ${{ vars.HOSTINGER_VM_ID }}
+          personal-access-token: ${{ secrets.PERSONAL_ACCESS_TOKEN }}
