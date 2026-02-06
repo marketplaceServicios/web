@@ -19,7 +19,7 @@ export default function HeroBanner() {
       <div className="relative container h-full flex flex-col justify-center">
         <div className="max-w-xl">
           <h1 className="text-4xl md:text-5xl lg:text-6xl font-serif font-bold text-white mb-4">
-            Experiencias que se sienten propias
+            Experiencias que se sienten al máximo
           </h1>
           <p className="text-lg md:text-xl text-white/90 mb-8">
             Diseñamos experiencias para quienes prefieren comprender antes de decidir.
