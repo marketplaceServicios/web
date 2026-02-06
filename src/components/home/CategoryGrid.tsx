@@ -6,7 +6,7 @@ export default function CategoryGrid() {
     <section className="py-16 bg-cream">
       <div className="container">
         <h2 className="text-3xl font-serif font-bold text-primary text-center mb-10">
-          Explora por categorías
+          CATEGORÍAS
         </h2>
 
         <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4">
