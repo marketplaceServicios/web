@@ -13,6 +13,7 @@ jobs:
       - name: Deploy to Hostinger
         uses: hostinger/deploy-action@v1
         with:
-          api-key: ${{ secrets.HOSTINGER_API_KEY }}
+          api-key: ${{ vars.HOSTINGER_API_KEY }}
           virtual-machine: ${{ vars.HOSTINGER_VM_ID }}
+}}
           personal-access-token: ${{ secrets.PERSONAL_ACCESS_TOKEN }}
