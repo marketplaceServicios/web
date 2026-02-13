@@ -17,8 +17,8 @@ export default function Footer() {
               />
             </Link>
             <p className="mt-4 text-cream/80 text-sm max-w-md font-serif">
-              Experiencias diseñadas para quienes prefieren comprender antes de decidir.
-              Donde el tiempo no es un recurso que se gasta, es un valor que se honra.
+              Turismo, viajes y bodas para personas 50+ y sus familias.
+              Información clara, proveedores confiables y acompañamiento real para decidir sin afán.
             </p>
           </div>
 
@@ -44,10 +44,10 @@ export default function Footer() {
               </li>
               <li>
                 <Link
-                  to="/categorias"
+                  to="/contacto"
                   className="text-cream/70 hover:text-golden transition-colors text-sm"
                 >
-                  Categorías
+                  Contáctanos
                 </Link>
               </li>
             </ul>
@@ -64,7 +64,7 @@ export default function Footer() {
                 className="flex items-center space-x-2 text-cream/70 hover:text-golden transition-colors text-sm"
               >
                 <Phone className="h-4 w-4" />
-                <span>+57 300 123 4567</span>
+                <span>Quiero hablar con un agente</span>
               </a>
               <p className="text-cream/70 text-sm">info@vivesilver.com</p>
             </div>

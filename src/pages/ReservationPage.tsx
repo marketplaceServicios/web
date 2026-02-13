@@ -65,9 +65,12 @@ export default function ReservationPage() {
   return (
     <div className="bg-cream min-h-screen py-8">
       <div className="container">
-        <h1 className="text-3xl font-serif font-bold text-primary mb-8">
-          Reservar experiencia: {plan.title}
+        <h1 className="text-3xl font-serif font-bold text-primary mb-2">
+          Tu reserva, paso a paso
         </h1>
+        <p className="text-stormy mb-8">
+          Confirma tu información con calma. Si algo no te queda claro, estamos para ayudarte.
+        </p>
 
         <div className="grid lg:grid-cols-3 gap-8">
           {/* Forms */}

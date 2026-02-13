@@ -20,10 +20,10 @@ export default function PopularPlans() {
       <div className="container">
         <div className="text-center mb-10">
           <h2 className="text-3xl font-serif font-bold text-primary mb-2">
-            Experiencias populares
+            Planes populares
           </h2>
           <p className="text-stormy">
-            Momentos elegidos por quienes saben distinguir lo verdaderamente importante
+            Opciones que las familias más consultan por tranquilidad, claridad y buen acompañamiento.
           </p>
         </div>
 
@@ -43,6 +43,11 @@ export default function PopularPlans() {
                 <div className="absolute top-3 left-3 bg-sage text-white px-3 py-1 rounded-full text-xs font-medium">
                   {plan.category}
                 </div>
+                {plan.datoClave && (
+                  <div className="absolute bottom-3 left-3 bg-white/90 text-primary px-3 py-1 rounded-full text-xs font-medium">
+                    {plan.datoClave}
+                  </div>
+                )}
               </div>
 
               <CardContent className="p-5">
@@ -82,7 +87,7 @@ export default function PopularPlans() {
                   </div>
                   <Link to={`/planes/${plan.id}`}>
                     <Button variant="outline" size="sm">
-                      Ver más
+                      Ver plan
                     </Button>
                   </Link>
                 </div>
@@ -94,7 +99,7 @@ export default function PopularPlans() {
         <div className="text-center mt-10">
           <Link to="/planes">
             <Button size="lg" variant="secondary">
-              Ver todas las experiencias
+              Ver todos los planes
             </Button>
           </Link>
         </div>

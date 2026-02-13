@@ -9,7 +9,7 @@ const navLinks = [
   { href: "/", label: "Inicio" },
   { href: "/planes", label: "Planes" },
   { href: "/categorias", label: "Categorías" },
-  { href: "#contacto", label: "Contáctanos" },
+  { href: "/contacto", label: "Contáctanos" },
 ];
 
 export default function Header() {
@@ -55,7 +55,7 @@ export default function Header() {
                 <div className="flex items-center">
                   <Input
                     type="search"
-                    placeholder="Buscar destinos..."
+                    placeholder="Busca una experiencia o destino…"
                     className="w-64"
                   />
                   <Button
@@ -103,7 +103,7 @@ export default function Header() {
                   <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-gray-400" />
                   <Input
                     type="search"
-                    placeholder="Buscar destinos..."
+                    placeholder="Busca una experiencia o destino…"
                     className="pl-10"
                   />
                 </div>

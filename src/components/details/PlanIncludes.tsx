@@ -33,7 +33,7 @@ export default function PlanIncludes({ plan }: PlanIncludesProps) {
 
       {/* Content */}
       <div className="p-6">
-        <h4 className="font-serif font-semibold text-primary mb-4">La experiencia incluye:</h4>
+        <h4 className="font-serif font-semibold text-primary mb-4">Lo que incluye</h4>
         <ul className="space-y-3 mb-6">
           {plan.includes.map((item, index) => (
             <li key={index} className="flex items-start gap-3">
@@ -63,7 +63,7 @@ export default function PlanIncludes({ plan }: PlanIncludesProps) {
         {/* CTA */}
         <Link to={`/reserva/${plan.id}`}>
           <Button className="w-full" size="lg">
-            Reservar experiencia
+            Reserva ahora
           </Button>
         </Link>
       </div>
