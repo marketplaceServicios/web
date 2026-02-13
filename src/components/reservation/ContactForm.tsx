@@ -73,6 +73,25 @@ export default function ContactForm({ data, onChange }: ContactFormProps) {
             />
           </div>
         </div>
+        <div>
+          <Label htmlFor="specialNeeds">¿Tienes alguna necesidad especial? (movilidad, alimentación, horarios)</Label>
+          <textarea
+            id="specialNeeds"
+            placeholder="Cuéntanos si necesitas algo especial para tu experiencia..."
+            className="flex min-h-[80px] w-full rounded-lg border border-gray-300 bg-white px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent"
+          />
+        </div>
+        <div>
+          <Label htmlFor="alternateContact">Contacto alterno (familiar/cuidador) — opcional</Label>
+          <Input
+            id="alternateContact"
+            type="tel"
+            placeholder="Nombre y teléfono de contacto alterno"
+          />
+        </div>
+        <p className="text-xs text-stormy">
+          Tu información está protegida. Solo la usamos para gestionar tu reserva.
+        </p>
       </CardContent>
     </Card>
   );

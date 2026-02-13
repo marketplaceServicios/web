@@ -20,6 +20,15 @@ export default function FeaturedOffer() {
   return (
     <section className="py-16 bg-white">
       <div className="container">
+        <div className="text-center mb-8">
+          <h2 className="text-3xl font-serif font-bold text-primary mb-2">
+            Plan destacado de la semana
+          </h2>
+          <p className="text-stormy">
+            Una opción recomendada por su comodidad, accesibilidad y experiencia integral.
+          </p>
+        </div>
+
         <div className="relative rounded-2xl overflow-hidden bg-primary">
           <div className="grid md:grid-cols-2 gap-8">
             {/* Image */}
@@ -62,7 +71,7 @@ export default function FeaturedOffer() {
 
               <Link to={`/planes/${featuredOffer.id}`}>
                 <Button size="lg" className="w-full md:w-auto">
-                  Ver experiencia
+                  Ver detalles
                 </Button>
               </Link>
             </div>

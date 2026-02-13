@@ -19,17 +19,37 @@ export default function HeroBanner() {
       <div className="relative container h-full flex flex-col justify-center">
         <div className="max-w-xl">
           <h1 className="text-4xl md:text-5xl lg:text-6xl font-serif font-bold text-white mb-4">
-            Experiencias que se sienten al máximo
+            Turismo, viajes y bodas Silver con calma, cuidado y confianza.
           </h1>
           <p className="text-lg md:text-xl text-white/90 mb-8">
-            Diseñamos experiencias para quienes prefieren comprender antes de decidir.
-            Momentos cuidados y memorables te esperan.
+            Explora experiencias pensadas para personas 50+ y sus familias.
+            Información clara, proveedores confiables y acompañamiento real
+            para decidir sin afán.
           </p>
-          <Link to="/planes">
-            <Button size="lg" className="text-lg px-8">
-              Descubrir experiencias
-            </Button>
-          </Link>
+          <div className="flex flex-wrap gap-4 mb-6">
+            <Link to="/planes">
+              <Button size="lg" className="text-lg px-8">
+                Explorar planes
+              </Button>
+            </Link>
+            <a
+              href="https://wa.me/573001234567"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              <Button size="lg" variant="outline" className="text-lg px-8 bg-white/10 text-white border-white hover:bg-white/20">
+                Hablar con un asesor
+              </Button>
+            </a>
+          </div>
+          <div className="space-y-1">
+            <p className="text-white/70 text-sm">
+              Resolvemos dudas por WhatsApp o llamada.
+            </p>
+            <p className="text-white/70 text-sm">
+              Te contamos con honestidad accesos, distancias y exigencia física.
+            </p>
+          </div>
         </div>
       </div>
     </section>

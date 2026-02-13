@@ -8,10 +8,10 @@ export default function Testimonials() {
       <div className="container">
         <div className="text-center mb-10">
           <h2 className="text-3xl font-serif font-bold text-primary mb-2">
-            Lo que dicen quienes ya vivieron la experiencia
+            Historias reales, decisiones más tranquilas
           </h2>
           <p className="text-stormy">
-            Testimonios de momentos que permanecen en la memoria
+            Experiencias contadas por quienes ya viajaron o celebraron. Porque la confianza también se construye escuchando.
           </p>
         </div>
 
@@ -38,6 +38,9 @@ export default function Testimonials() {
                     <p className="font-semibold text-primary">
                       {testimonial.name}
                     </p>
+                    {testimonial.city && (
+                      <p className="text-sm text-stormy">{testimonial.city}</p>
+                    )}
                     <div className="flex items-center mt-1">
                       {[...Array(5)].map((_, i) => (
                         <Star

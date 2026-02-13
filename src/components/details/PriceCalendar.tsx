@@ -63,7 +63,10 @@ export default function PriceCalendar({ price, startDate }: PriceCalendarProps) 
 
   return (
     <div className="bg-white rounded-xl p-6 border">
-      <h2 className="text-xl font-semibold text-forest mb-4">Disponibilidad</h2>
+      <h2 className="text-xl font-semibold text-forest mb-2">Fechas disponibles y precios</h2>
+      <p className="text-sm text-stormy mb-4">
+        Elige una fecha. Si necesitas otra opción, puedes solicitar una cotización especial.
+      </p>
 
       {/* Month Navigation */}
       <div className="flex items-center justify-between mb-4">

@@ -6,6 +6,7 @@ import CategoriesPage from "./pages/CategoriesPage";
 import DetailsPage from "./pages/DetailsPage";
 import ReservationPage from "./pages/ReservationPage";
 import OrderPage from "./pages/OrderPage";
+import ContactPage from "./pages/ContactPage";
 
 function App() {
   return (
@@ -18,6 +19,7 @@ function App() {
           <Route path="/planes/:id" element={<DetailsPage />} />
           <Route path="/reserva/:id" element={<ReservationPage />} />
           <Route path="/orden" element={<OrderPage />} />
+          <Route path="/contacto" element={<ContactPage />} />
         </Routes>
       </Layout>
     </Router>

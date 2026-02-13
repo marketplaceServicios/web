@@ -39,12 +39,12 @@ export default function OrderConfirmation({
         <div className="inline-flex items-center justify-center w-20 h-20 rounded-full bg-sage/20 mb-6">
           <CheckCircle className="w-12 h-12 text-sage" />
         </div>
-        <h1 className="text-3xl font-serif font-bold text-primary mb-2">¡Tu experiencia está reservada!</h1>
+        <h1 className="text-3xl font-serif font-bold text-primary mb-2">¡Reserva recibida!</h1>
         <p className="text-stormy text-lg">
-          Hemos recibido tu pago exitosamente
+          Gracias por confiar en Vive Silver.
         </p>
         <p className="text-stormy/70 mt-2">
-          Recibirás un correo con los detalles de tu reserva
+          En las próximas 24–48 horas confirmaremos disponibilidad y te contactaremos para afinar detalles.
         </p>
       </div>
 
@@ -107,12 +107,23 @@ export default function OrderConfirmation({
       </Card>
 
       {/* CTA */}
-      <div className="text-center">
-        <Link to="/">
+      <div className="text-center space-y-4">
+        <Link to="/planes">
           <Button size="lg" className="px-8">
-            Volver al inicio
+            Volver a planes
           </Button>
         </Link>
+        <p className="text-stormy text-sm">
+          ¿Prefieres hablar ahora?{" "}
+          <a
+            href="https://wa.me/573001234567"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="text-golden font-medium hover:underline"
+          >
+            Escríbenos por WhatsApp.
+          </a>
+        </p>
       </div>
     </div>
   );

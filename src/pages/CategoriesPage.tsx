@@ -17,10 +17,10 @@ export default function CategoriesPage() {
         <div className="relative container h-full flex items-center justify-center">
           <div className="text-center">
             <h1 className="text-4xl md:text-5xl font-bold text-white mb-4">
-              Conoce todas nuestras categorías
+              ¿Qué quieres vivir?
             </h1>
             <p className="text-lg text-white/90 max-w-2xl mx-auto">
-              Encuentra el tipo de experiencia perfecta para tu próxima aventura
+              Elige una categoría y encuentra opciones claras, con fotos reales y detalles útiles para decidir con calma.
             </p>
           </div>
         </div>

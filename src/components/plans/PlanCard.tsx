@@ -50,6 +50,11 @@ export default function PlanCard({ plan, highlighted = false }: PlanCardProps) {
             DESTACADO
           </div>
         )}
+        {plan.datoClave && (
+          <div className="absolute bottom-3 left-3 bg-white/90 text-primary px-3 py-1 rounded-full text-xs font-medium">
+            {plan.datoClave}
+          </div>
+        )}
       </div>
 
       <CardContent className="p-5">
@@ -81,7 +86,7 @@ export default function PlanCard({ plan, highlighted = false }: PlanCardProps) {
             <span className="text-sm text-stormy ml-1">/ persona</span>
           </div>
           <Link to={`/planes/${plan.id}`}>
-            <Button size="sm">Ver</Button>
+            <Button size="sm">Ver plan</Button>
           </Link>
         </div>
       </CardContent>

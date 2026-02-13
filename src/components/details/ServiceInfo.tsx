@@ -46,6 +46,15 @@ export default function ServiceInfo({ plan }: ServiceInfoProps) {
         <span className="text-stormy">({plan.reviews} reseñas)</span>
       </div>
 
+      {/* Dato clave */}
+      {plan.datoClave && (
+        <div className="pt-4">
+          <span className="inline-block bg-sage/10 text-sage px-4 py-2 rounded-full text-sm font-medium">
+            {plan.datoClave}
+          </span>
+        </div>
+      )}
+
       {/* Description */}
       <div className="pt-4 border-t">
         <h2 className="text-xl font-serif font-semibold text-primary mb-3">Descripción</h2>

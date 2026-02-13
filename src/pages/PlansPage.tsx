@@ -41,11 +41,11 @@ export default function PlansPage() {
           <div className="text-center">
             <h1 className="text-4xl md:text-5xl font-serif font-bold text-white mb-4">
               {categoryId === "all"
-                ? "Descubre experiencias únicas"
-                : `Experiencias de ${currentCategory?.name || "Viaje"}`}
+                ? "Explora planes con calma"
+                : `${currentCategory?.name || "Planes"}`}
             </h1>
             <p className="text-lg text-cream/90">
-              Momentos diseñados para quienes valoran el tiempo
+              Filtra por categoría y elige con información clara. Si necesitas ayuda, te acompañamos.
             </p>
           </div>
         </div>
@@ -84,7 +84,23 @@ export default function PlansPage() {
           </div>
 
           {/* Plans Grid */}
-          <PlansGrid plans={filteredPlans} />
+          {filteredPlans.length > 0 ? (
+            <PlansGrid plans={filteredPlans} />
+          ) : (
+            <div className="text-center py-16">
+              <p className="text-stormy text-lg mb-4">
+                No encontramos planes con esos filtros. Prueba con otra categoría o escríbenos y te orientamos.
+              </p>
+              <a
+                href="https://wa.me/573001234567"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center px-6 py-3 bg-golden text-white rounded-lg font-medium hover:bg-golden/90 transition-colors"
+              >
+                Hablar con un asesor
+              </a>
+            </div>
+          )}
         </div>
       </section>
     </div>

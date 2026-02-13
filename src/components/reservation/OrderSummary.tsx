@@ -110,11 +110,11 @@ export default function OrderSummary({
 
         {/* Submit Button */}
         <Button className="w-full" size="lg" onClick={onSubmit}>
-          Realizar el pago
+          Confirmar y continuar
         </Button>
 
         <p className="text-xs text-stormy text-center">
-          Al continuar, aceptas nuestros términos y condiciones
+          Tu información está protegida. Solo la usamos para gestionar tu reserva.
         </p>
       </CardContent>
     </Card>
