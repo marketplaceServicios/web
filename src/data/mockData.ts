@@ -1,3 +1,5 @@
+import { planImages } from "@/assets/images/planImages";
+
 export interface Category {
   id: string;
   name: string;
@@ -81,9 +83,9 @@ export const plans: Plan[] = [
     duration: "1 día",
     startDate: "2026-03-15",
     endDate: "2026-03-15",
-    image: "/images/recinto-del-pensamiento.jpg",
+    image: planImages.recintoDelPensamiento,
     images: [
-      "/images/recinto-del-pensamiento.jpg",
+      planImages.recintoDelPensamiento,
       "https://images.unsplash.com/photo-1583417319070-4a69db38a482?w=600",
       "https://images.unsplash.com/photo-1518105779142-d975f22f1b0a?w=600",
       "https://images.unsplash.com/photo-1571115764595-644a1f56a55c?w=600",
@@ -146,9 +148,9 @@ export const plans: Plan[] = [
     duration: "3 días / 2 noches",
     startDate: "2026-03-20",
     endDate: "2026-03-22",
-    image: "/images/atardeceres-de-cafe.jpg",
+    image: planImages.atardeceresDeCafe,
     images: [
-      "/images/atardeceres-de-cafe.jpg",
+      planImages.atardeceresDeCafe,
       "https://images.unsplash.com/photo-1538097304804-2a1b932466a9?w=600",
     ],
     rating: 4.7,
@@ -229,9 +231,9 @@ export const plans: Plan[] = [
     duration: "3 días / 2 noches",
     startDate: "2026-04-05",
     endDate: "2026-04-07",
-    image: "/images/hacienda-lindaraja.JPG",
+    image: planImages.haciendaLindaraja,
     images: [
-      "/images/hacienda-lindaraja.JPG",
+      planImages.haciendaLindaraja,
     ],
     rating: 5.0,
     reviews: 89,
@@ -257,9 +259,9 @@ export const plans: Plan[] = [
     duration: "2 días / 1 noche",
     startDate: "2026-07-15",
     endDate: "2026-07-16",
-    image: "/images/renovacion-votos.jpg",
+    image: planImages.renovacionVotos,
     images: [
-      "/images/renovacion-votos.jpg",
+      planImages.renovacionVotos,
     ],
     rating: 5.0,
     reviews: 145,
@@ -284,9 +286,9 @@ export const plans: Plan[] = [
     duration: "4 horas",
     startDate: "2026-03-16",
     endDate: "2026-03-16",
-    image: "/images/tour-paisaje-cultural.jpg",
+    image: planImages.tourPaisajeCultural,
     images: [
-      "/images/tour-paisaje-cultural.jpg",
+      planImages.tourPaisajeCultural,
     ],
     rating: 4.7,
     reviews: 512,
