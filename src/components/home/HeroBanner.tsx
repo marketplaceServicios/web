@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
-import heroBg from "@/assets/images/hero.jpg";
+import heroBg from "@/assets/images/hero.webp";
 
 export default function HeroBanner() {
   return (
