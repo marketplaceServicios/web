@@ -58,7 +58,7 @@ export default function PlanCard({ plan, highlighted = false }: PlanCardProps) {
       </div>
 
       <CardContent className="p-5">
-        <h3 className="text-xl font-serif font-semibold text-primary mb-2">{plan.title}</h3>
+        <h3 className="text-lg md:text-xl font-serif font-semibold text-primary mb-2 leading-snug">{plan.title}</h3>
 
         <div className="space-y-2 mb-4">
           <div className="flex items-center text-stormy text-sm">
@@ -73,19 +73,19 @@ export default function PlanCard({ plan, highlighted = false }: PlanCardProps) {
           </div>
         </div>
 
-        <div className="flex items-center justify-between">
-          <div>
+        <div className="flex items-end justify-between gap-2">
+          <div className="min-w-0">
             {plan.originalPrice && (
-              <span className="text-sm text-stormy/60 line-through block">
+              <span className="text-xs text-stormy/60 line-through block">
                 {formatPrice(plan.originalPrice)}
               </span>
             )}
-            <span className="text-xl font-bold text-golden">
+            <span className="text-lg font-bold text-golden">
               {formatPrice(plan.price)}
             </span>
-            <span className="text-sm text-stormy ml-1">/ persona</span>
+            <span className="text-xs text-stormy ml-1">/ persona</span>
           </div>
-          <Link to={`/planes/${plan.id}`}>
+          <Link to={`/planes/${plan.id}`} className="flex-shrink-0">
             <Button size="sm">Ver plan</Button>
           </Link>
         </div>
