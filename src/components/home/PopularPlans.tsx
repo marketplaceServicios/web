@@ -78,14 +78,14 @@ export default function PopularPlans() {
                   </span>
                 </div>
 
-                <div className="flex items-center justify-between">
-                  <div>
+                <div className="flex items-end justify-between gap-2">
+                  <div className="min-w-0">
                     <span className="text-sm text-stormy">Desde</span>
-                    <p className="text-xl font-bold text-golden">
+                    <p className="text-lg font-bold text-golden">
                       {formatPrice(plan.price)}
                     </p>
                   </div>
-                  <Link to={`/planes/${plan.id}`}>
+                  <Link to={`/planes/${plan.id}`} className="flex-shrink-0">
                     <Button variant="outline" size="sm">
                       Ver plan
                     </Button>

@@ -20,13 +20,13 @@ export default function Header() {
   return (
     <header className="bg-white shadow-sm sticky top-0 z-50">
       <div className="container">
-        <div className="flex items-center justify-between h-28">
+        <div className="flex items-center justify-between h-20 md:h-28">
           {/* Logo */}
           <Link to="/" className="flex items-center">
             <img
               src={logoHorizontal}
               alt="Vive Silver"
-              className="h-24 w-auto"
+              className="h-14 md:h-24 w-auto"
             />
           </Link>
 

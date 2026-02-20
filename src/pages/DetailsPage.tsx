@@ -18,22 +18,22 @@ export default function DetailsPage() {
   return (
     <div className="bg-cream min-h-screen">
       {/* Hero */}
-      <section className="relative h-[200px] overflow-hidden">
+      <section className="relative h-[220px] md:h-[260px] overflow-hidden">
         <div
           className="absolute inset-0 bg-cover bg-center"
           style={{ backgroundImage: `url(${plan.image})` }}
         >
           <div className="absolute inset-0 bg-primary/60" />
         </div>
-        <div className="relative container h-full flex items-center">
-          <div>
+        <div className="relative container h-full flex items-center px-4 md:px-6">
+          <div className="min-w-0">
             <span className="inline-block bg-sage text-white px-3 py-1 rounded-full text-sm font-medium mb-2">
               {plan.category}
             </span>
-            <h1 className="text-3xl md:text-4xl font-serif font-bold text-white">
+            <h1 className="text-2xl md:text-4xl font-serif font-bold text-white leading-tight">
               {plan.title}
             </h1>
-            <p className="text-cream/80">{plan.location}</p>
+            <p className="text-cream/80 text-sm md:text-base">{plan.location}</p>
           </div>
         </div>
       </section>

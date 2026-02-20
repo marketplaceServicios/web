@@ -45,26 +45,26 @@ export default function FeaturedOffer() {
             </div>
 
             {/* Content */}
-            <div className="p-8 md:p-12 flex flex-col justify-center">
-              <h2 className="text-3xl md:text-4xl font-serif font-bold text-white mb-4">
+            <div className="p-6 md:p-12 flex flex-col justify-center">
+              <h2 className="text-2xl md:text-4xl font-serif font-bold text-white mb-4 leading-tight">
                 {featuredOffer.title}
               </h2>
-              <p className="text-cream/80 mb-6">{featuredOffer.description}</p>
+              <p className="text-cream/80 mb-6 text-sm md:text-base">{featuredOffer.description}</p>
 
-              <div className="flex items-center gap-4 mb-6">
+              <div className="flex items-center gap-4 mb-4">
                 <div className="flex items-center text-cream/80">
-                  <Clock className="w-5 h-5 mr-2" />
-                  <span>{featuredOffer.duration}</span>
+                  <Clock className="w-5 h-5 mr-2 flex-shrink-0" />
+                  <span className="text-sm md:text-base">{featuredOffer.duration}</span>
                 </div>
               </div>
 
-              <div className="flex items-baseline gap-3 mb-6">
+              <div className="flex flex-wrap items-baseline gap-3 mb-6">
                 {featuredOffer.originalPrice && (
-                  <span className="text-cream/60 line-through text-lg">
+                  <span className="text-cream/60 line-through text-base">
                     {formatPrice(featuredOffer.originalPrice)}
                   </span>
                 )}
-                <span className="text-3xl font-bold text-golden">
+                <span className="text-2xl md:text-3xl font-bold text-golden">
                   {formatPrice(featuredOffer.price)}
                 </span>
               </div>
