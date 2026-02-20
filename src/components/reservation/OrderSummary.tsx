@@ -9,6 +9,7 @@ interface OrderSummaryProps {
   selectedPayment: string;
   onPaymentChange: (method: string) => void;
   onSubmit: () => void;
+  submitting?: boolean;
 }
 
 export default function OrderSummary({
@@ -17,6 +18,7 @@ export default function OrderSummary({
   selectedPayment,
   onPaymentChange,
   onSubmit,
+  submitting = false,
 }: OrderSummaryProps) {
   const formatPrice = (price: number) => {
     return new Intl.NumberFormat("es-CO", {
@@ -109,8 +111,8 @@ export default function OrderSummary({
         </div>
 
         {/* Submit Button */}
-        <Button className="w-full" size="lg" onClick={onSubmit}>
-          Confirmar y continuar
+        <Button className="w-full" size="lg" onClick={onSubmit} disabled={submitting}>
+          {submitting ? "Procesando..." : "Confirmar y continuar"}
         </Button>
 
         <p className="text-xs text-stormy text-center">

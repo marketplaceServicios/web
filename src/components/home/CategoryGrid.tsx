@@ -1,8 +1,12 @@
 import { Link } from "react-router-dom";
-import { categories } from "@/data/mockData";
+import { categories as mockCategories, type Category } from "@/data/mockData";
 
-export default function CategoryGrid() {
-  const displayCategories = categories.filter((c) => c.id !== "all");
+interface Props {
+  categories?: Category[];
+}
+
+export default function CategoryGrid({ categories }: Props) {
+  const displayCategories = (categories ?? mockCategories).filter((c) => c.id !== "all");
 
   return (
     <section className="py-16 bg-cream">

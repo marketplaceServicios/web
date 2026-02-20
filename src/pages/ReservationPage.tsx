@@ -1,6 +1,7 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useParams, Navigate, useNavigate } from "react-router-dom";
-import { getPlanById } from "@/data/mockData";
+import { getPlanById, createReservation } from "@/lib/api";
+import type { Plan } from "@/data/mockData";
 import TouristForm from "@/components/reservation/TouristForm";
 import BillingForm from "@/components/reservation/BillingForm";
 import ContactForm from "@/components/reservation/ContactForm";
@@ -11,7 +12,10 @@ import { Plus, Minus } from "lucide-react";
 export default function ReservationPage() {
   const { id } = useParams<{ id: string }>();
   const navigate = useNavigate();
-  const plan = id ? getPlanById(id) : undefined;
+
+  const [plan, setPlan] = useState<Plan | null>(null);
+  const [loading, setLoading] = useState(true);
+  const [submitting, setSubmitting] = useState(false);
 
   const [numTourists, setNumTourists] = useState(1);
   const [tourists, setTourists] = useState([
@@ -30,6 +34,21 @@ export default function ReservationPage() {
     phone: "",
   });
   const [selectedPayment, setSelectedPayment] = useState("credit");
+
+  useEffect(() => {
+    if (!id) { setLoading(false); return; }
+    getPlanById(id)
+      .then((p) => { setPlan(p); setLoading(false); })
+      .catch(() => setLoading(false));
+  }, [id]);
+
+  if (loading) {
+    return (
+      <div className="min-h-screen bg-cream flex items-center justify-center">
+        <p className="text-stormy text-lg">Cargando plan...</p>
+      </div>
+    );
+  }
 
   if (!plan) {
     return <Navigate to="/planes" replace />;
@@ -50,16 +69,27 @@ export default function ReservationPage() {
     }
   };
 
-  const handleSubmit = () => {
-    // In a real app, this would submit to an API
-    // For now, just navigate to the order confirmation page
-    navigate("/orden", {
-      state: {
-        plan,
-        numTourists,
-        reservationCode: `TRV-${Date.now().toString(36).toUpperCase()}`,
-      },
-    });
+  const handleSubmit = async () => {
+    setSubmitting(true);
+    try {
+      const result: any = await createReservation({
+        planId: plan.id,
+        numPersonas: numTourists,
+        turistas: tourists,
+        datosFacturacion: { ...billing, ...contact },
+        metodoPago: selectedPayment,
+      });
+      navigate("/orden", {
+        state: {
+          plan,
+          numTourists,
+          reservationCode: result.reserva?.codigo || `VS-${Date.now().toString(36).toUpperCase()}`,
+        },
+      });
+    } catch {
+      setSubmitting(false);
+      alert("Ocurrió un error al procesar tu reserva. Por favor intenta de nuevo.");
+    }
   };
 
   return (
@@ -127,6 +157,7 @@ export default function ReservationPage() {
               selectedPayment={selectedPayment}
               onPaymentChange={setSelectedPayment}
               onSubmit={handleSubmit}
+              submitting={submitting}
             />
           </div>
         </div>

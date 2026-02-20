@@ -73,7 +73,7 @@ export const categories: Category[] = [
 export const plans: Plan[] = [
   {
     id: "catedral-sal",
-    title: "Catedral de Sal",
+    title: "Recinto del pensamiento",
     location: "Zipaquirá, Cundinamarca",
     category: "Viajes Silver",
     categoryId: "viajes",
