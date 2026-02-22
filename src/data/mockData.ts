@@ -1,3 +1,5 @@
+import { planImages } from "@/assets/images/planImages";
+
 export interface Category {
   id: string;
   name: string;
@@ -73,7 +75,7 @@ export const categories: Category[] = [
 export const plans: Plan[] = [
   {
     id: "catedral-sal",
-    title: "Recinto del pensamiento",
+    title: "Recinto del Pensamiento",
     location: "Zipaquirá, Cundinamarca",
     category: "Viajes Silver",
     categoryId: "viajes",
@@ -81,9 +83,9 @@ export const plans: Plan[] = [
     duration: "1 día",
     startDate: "2026-03-15",
     endDate: "2026-03-15",
-    image: "https://images.unsplash.com/photo-1568402102990-bc541580b59f?w=600",
+    image: planImages.recintoDelPensamiento,
     images: [
-      "https://images.unsplash.com/photo-1568402102990-bc541580b59f?w=600",
+      planImages.recintoDelPensamiento,
       "https://images.unsplash.com/photo-1583417319070-4a69db38a482?w=600",
       "https://images.unsplash.com/photo-1518105779142-d975f22f1b0a?w=600",
       "https://images.unsplash.com/photo-1571115764595-644a1f56a55c?w=600",
@@ -138,7 +140,7 @@ export const plans: Plan[] = [
   },
   {
     id: "cartagena",
-    title: "Cartagena Histórica",
+    title: "Atardeceres de café",
     location: "Cartagena, Bolívar",
     category: "Viajes Silver",
     categoryId: "viajes",
@@ -146,9 +148,9 @@ export const plans: Plan[] = [
     duration: "3 días / 2 noches",
     startDate: "2026-03-20",
     endDate: "2026-03-22",
-    image: "https://images.unsplash.com/photo-1583531352515-8884af319dc1?w=600",
+    image: planImages.atardeceresDeCafe,
     images: [
-      "https://images.unsplash.com/photo-1583531352515-8884af319dc1?w=600",
+      planImages.atardeceresDeCafe,
       "https://images.unsplash.com/photo-1538097304804-2a1b932466a9?w=600",
     ],
     rating: 4.7,
@@ -221,7 +223,7 @@ export const plans: Plan[] = [
   },
   {
     id: "boda-hacienda",
-    title: "Boda en Hacienda Bambusa",
+    title: "Boda en Hacienda Lindaraja",
     location: "Eje Cafetero",
     category: "Bodas Silver",
     categoryId: "bodas",
@@ -229,9 +231,9 @@ export const plans: Plan[] = [
     duration: "3 días / 2 noches",
     startDate: "2026-04-05",
     endDate: "2026-04-07",
-    image: "https://images.unsplash.com/photo-1519741497674-611481863552?w=600",
+    image: planImages.haciendaLindaraja,
     images: [
-      "https://images.unsplash.com/photo-1519741497674-611481863552?w=600",
+      planImages.haciendaLindaraja,
     ],
     rating: 5.0,
     reviews: 89,
@@ -257,9 +259,9 @@ export const plans: Plan[] = [
     duration: "2 días / 1 noche",
     startDate: "2026-07-15",
     endDate: "2026-07-16",
-    image: "https://images.unsplash.com/photo-1432405972618-c60b0225b8f9?w=600",
+    image: planImages.renovacionVotos,
     images: [
-      "https://images.unsplash.com/photo-1432405972618-c60b0225b8f9?w=600",
+      planImages.renovacionVotos,
     ],
     rating: 5.0,
     reviews: 145,
@@ -276,7 +278,7 @@ export const plans: Plan[] = [
   },
   {
     id: "fotografia-silver",
-    title: "Fotografía profesional Silver",
+    title: "Tour paisaje cultural cafetero",
     location: "Bogotá y alrededores",
     category: "Servicios",
     categoryId: "servicios",
@@ -284,9 +286,9 @@ export const plans: Plan[] = [
     duration: "4 horas",
     startDate: "2026-03-16",
     endDate: "2026-03-16",
-    image: "https://images.unsplash.com/photo-1593995863951-57c27e518295?w=600",
+    image: planImages.tourPaisajeCultural,
     images: [
-      "https://images.unsplash.com/photo-1593995863951-57c27e518295?w=600",
+      planImages.tourPaisajeCultural,
     ],
     rating: 4.7,
     reviews: 512,
