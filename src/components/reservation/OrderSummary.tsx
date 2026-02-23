@@ -1,7 +1,7 @@
 import { Plan, paymentMethods } from "@/data/mockData";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { MapPin, Users, Calendar } from "lucide-react";
+import { MapPin, Users, CalendarCheck } from "lucide-react";
 
 interface OrderSummaryProps {
   plan: Plan;
@@ -9,6 +9,9 @@ interface OrderSummaryProps {
   selectedPayment: string;
   onPaymentChange: (method: string) => void;
   onSubmit: () => void;
+  submitting?: boolean;
+  selectedPrice?: number | null;
+  selectedDate?: string | null;
 }
 
 export default function OrderSummary({
@@ -17,24 +20,29 @@ export default function OrderSummary({
   selectedPayment,
   onPaymentChange,
   onSubmit,
+  submitting = false,
+  selectedPrice,
+  selectedDate,
 }: OrderSummaryProps) {
-  const formatPrice = (price: number) => {
-    return new Intl.NumberFormat("es-CO", {
+  const formatPrice = (price: number) =>
+    new Intl.NumberFormat("es-CO", {
       style: "currency",
       currency: "COP",
       minimumFractionDigits: 0,
     }).format(price);
-  };
 
-  const formatDate = (dateStr: string) => {
-    return new Date(dateStr).toLocaleDateString("es-CO", {
+  const formatDate = (iso: string) => {
+    const [y, m, d] = iso.split("-").map(Number);
+    return new Date(y, m - 1, d).toLocaleDateString("es-CO", {
+      weekday: "long",
       day: "numeric",
       month: "long",
       year: "numeric",
     });
   };
 
-  const subtotal = plan.price * numTourists;
+  const unitPrice = selectedPrice ?? plan.price;
+  const subtotal = unitPrice * numTourists;
   const tax = subtotal * 0.19;
   const total = subtotal + tax;
 
@@ -57,17 +65,26 @@ export default function OrderSummary({
             <Users className="w-5 h-5 text-golden" />
             <span className="text-gray-700">{numTourists} adulto(s)</span>
           </div>
-          <div className="flex items-center gap-3">
-            <Calendar className="w-5 h-5 text-golden" />
-            <span className="text-gray-700">{formatDate(plan.startDate)}</span>
-          </div>
+          {selectedDate && (
+            <div className="flex items-start gap-3">
+              <CalendarCheck className="w-5 h-5 text-sage flex-shrink-0 mt-0.5" />
+              <div>
+                <p className="text-xs font-semibold text-sage uppercase tracking-wide leading-none mb-0.5">
+                  Fecha reservada
+                </p>
+                <span className="text-gray-700 capitalize text-sm">
+                  {formatDate(selectedDate)}
+                </span>
+              </div>
+            </div>
+          )}
         </div>
 
         {/* Price Breakdown */}
         <div className="border-t pt-4 space-y-2">
           <div className="flex justify-between text-sm">
             <span className="text-stormy">
-              {formatPrice(plan.price)} x {numTourists} adulto(s)
+              {formatPrice(unitPrice)} x {numTourists} adulto(s)
             </span>
             <span>{formatPrice(subtotal)}</span>
           </div>
@@ -109,8 +126,8 @@ export default function OrderSummary({
         </div>
 
         {/* Submit Button */}
-        <Button className="w-full" size="lg" onClick={onSubmit}>
-          Confirmar y continuar
+        <Button className="w-full" size="lg" onClick={onSubmit} disabled={submitting}>
+          {submitting ? "Procesando..." : "Confirmar y continuar"}
         </Button>
 
         <p className="text-xs text-stormy text-center">

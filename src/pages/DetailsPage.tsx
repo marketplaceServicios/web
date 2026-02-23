@@ -1,5 +1,7 @@
+import { useState, useEffect } from "react";
 import { useParams, Navigate } from "react-router-dom";
-import { getPlanById } from "@/data/mockData";
+import { getPlanById } from "@/lib/api";
+import type { Plan } from "@/data/mockData";
 import ImageGallery from "@/components/details/ImageGallery";
 import ServiceInfo from "@/components/details/ServiceInfo";
 import Amenities from "@/components/details/Amenities";
@@ -9,7 +11,30 @@ import QuoteForm from "@/components/details/QuoteForm";
 
 export default function DetailsPage() {
   const { id } = useParams<{ id: string }>();
-  const plan = id ? getPlanById(id) : undefined;
+  const [plan, setPlan] = useState<Plan | null>(null);
+  const [loading, setLoading] = useState(true);
+  const [selectedDate, setSelectedDate] = useState<string | null>(null);
+  const [selectedPrice, setSelectedPrice] = useState<number>(0);
+
+  const handleDateSelect = (isoDate: string, price: number) => {
+    setSelectedDate(isoDate);
+    setSelectedPrice(price);
+  };
+
+  useEffect(() => {
+    if (!id) { setLoading(false); return; }
+    getPlanById(id)
+      .then((p) => { setPlan(p); setLoading(false); })
+      .catch(() => setLoading(false));
+  }, [id]);
+
+  if (loading) {
+    return (
+      <div className="min-h-screen bg-cream flex items-center justify-center">
+        <p className="text-stormy text-lg">Cargando plan...</p>
+      </div>
+    );
+  }
 
   if (!plan) {
     return <Navigate to="/planes" replace />;
@@ -54,15 +79,24 @@ export default function DetailsPage() {
               </div>
 
               {/* Calendar */}
-              <PriceCalendar price={plan.price} startDate={plan.startDate} />
+              <PriceCalendar
+                price={plan.price}
+                disponibilidad={plan.disponibilidad}
+                selectedDate={selectedDate}
+                onDateSelect={handleDateSelect}
+              />
 
               {/* Quote Form */}
-              <QuoteForm />
+              <QuoteForm planId={plan.id} planTitle={plan.title} />
             </div>
 
             {/* Sidebar */}
             <div className="lg:col-span-1">
-              <PlanIncludes plan={plan} />
+              <PlanIncludes
+                plan={plan}
+                selectedDate={selectedDate}
+                selectedPrice={selectedPrice || plan.price}
+              />
             </div>
           </div>
         </div>

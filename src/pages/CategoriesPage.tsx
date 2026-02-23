@@ -1,6 +1,15 @@
+import { useState, useEffect } from "react";
 import CategoriesGrid from "@/components/categories/CategoriesGrid";
+import { getCategories } from "@/lib/api";
+import type { Category } from "@/data/mockData";
 
 export default function CategoriesPage() {
+  const [categories, setCategories] = useState<Category[]>([]);
+
+  useEffect(() => {
+    getCategories().then(setCategories).catch(() => {});
+  }, []);
+
   return (
     <div>
       {/* Hero Banner */}
@@ -29,7 +38,7 @@ export default function CategoriesPage() {
       {/* Categories Grid */}
       <section className="py-16 bg-cream">
         <div className="container">
-          <CategoriesGrid />
+          <CategoriesGrid categories={categories} />
         </div>
       </section>
     </div>

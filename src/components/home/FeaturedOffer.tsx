@@ -1,11 +1,14 @@
 import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
-import { getOfferPlans } from "@/data/mockData";
+import { type Plan } from "@/data/mockData";
 import { Clock } from "lucide-react";
 
-export default function FeaturedOffer() {
-  const offers = getOfferPlans();
-  const featuredOffer = offers[0];
+interface Props {
+  offer?: Plan | null;
+}
+
+export default function FeaturedOffer({ offer }: Props) {
+  const featuredOffer = offer;
 
   if (!featuredOffer) return null;
 

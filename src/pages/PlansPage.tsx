@@ -1,17 +1,36 @@
+import { useState, useEffect, useMemo } from "react";
 import { useSearchParams } from "react-router-dom";
-import { useMemo } from "react";
 import PlansGrid from "@/components/plans/PlansGrid";
-import { categories, getPlansByCategory } from "@/data/mockData";
+import { getCategories, getPlans } from "@/lib/api";
+import type { Category, Plan } from "@/data/mockData";
+
+const ALL_CATEGORY: Category = {
+  id: "all",
+  name: "Todos",
+  image: "",
+  description: "",
+};
 
 export default function PlansPage() {
   const [searchParams, setSearchParams] = useSearchParams();
   const categoryId = searchParams.get("categoria") || "all";
 
-  const filteredPlans = useMemo(() => {
-    return getPlansByCategory(categoryId);
-  }, [categoryId]);
+  const [categories, setCategories] = useState<Category[]>([]);
+  const [plans, setPlans] = useState<Plan[]>([]);
 
-  const currentCategory = categories.find((cat) => cat.id === categoryId);
+  useEffect(() => {
+    getCategories().then(setCategories).catch(() => {});
+    getPlans().then(setPlans).catch(() => {});
+  }, []);
+
+  const allCategories = [ALL_CATEGORY, ...categories];
+
+  const filteredPlans = useMemo(() => {
+    if (categoryId === "all") return plans;
+    return plans.filter((p) => p.categoryId === categoryId);
+  }, [plans, categoryId]);
+
+  const currentCategory = allCategories.find((cat) => cat.id === categoryId);
 
   const handleCategoryChange = (newCategoryId: string) => {
     if (newCategoryId === "all") {
@@ -57,7 +76,7 @@ export default function PlansPage() {
           {/* Category Filter */}
           <div className="mb-8">
             <div className="flex flex-wrap gap-3 justify-center">
-              {categories.map((category) => (
+              {allCategories.map((category) => (
                 <button
                   key={category.id}
                   onClick={() => handleCategoryChange(category.id)}

@@ -2,7 +2,7 @@ import { Link } from "react-router-dom";
 import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Plan } from "@/data/mockData";
-import { MapPin, Calendar } from "lucide-react";
+import { MapPin } from "lucide-react";
 
 interface PlanCardProps {
   plan: Plan;
@@ -16,13 +16,6 @@ export default function PlanCard({ plan, highlighted = false }: PlanCardProps) {
       currency: "COP",
       minimumFractionDigits: 0,
     }).format(price);
-  };
-
-  const formatDate = (dateStr: string) => {
-    return new Date(dateStr).toLocaleDateString("es-CO", {
-      day: "numeric",
-      month: "short",
-    });
   };
 
   return (
@@ -64,12 +57,6 @@ export default function PlanCard({ plan, highlighted = false }: PlanCardProps) {
           <div className="flex items-center text-stormy text-sm">
             <MapPin className="w-4 h-4 mr-2 flex-shrink-0" />
             <span className="truncate">{plan.location}</span>
-          </div>
-          <div className="flex items-center text-stormy text-sm">
-            <Calendar className="w-4 h-4 mr-2 flex-shrink-0" />
-            <span>
-              {formatDate(plan.startDate)} - {formatDate(plan.endDate)}
-            </span>
           </div>
         </div>
 

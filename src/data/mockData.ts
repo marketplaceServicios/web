@@ -28,6 +28,12 @@ export interface Plan {
   highlighted?: boolean;
   isOffer?: boolean;
   datoClave?: string;
+  disponibilidad?: {
+    tipo: 'siempre' | 'dias_semana' | 'fechas_especificas';
+    diasSemana?: number[];
+    precioFinDeSemana?: number | null;
+    fechasEspeciales?: { fecha: string; precio: number }[];
+  } | null;
 }
 
 export interface Testimonial {

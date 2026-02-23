@@ -3,7 +3,8 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Card, CardContent } from "@/components/ui/card";
-import { MessageCircle } from "lucide-react";
+import { MessageCircle, CheckCircle } from "lucide-react";
+import { createContacto } from "@/lib/api";
 
 export default function ContactPage() {
   const [formData, setFormData] = useState({
@@ -13,17 +14,29 @@ export default function ContactPage() {
     message: "",
     contactPreference: "whatsapp",
   });
+  const [enviando, setEnviando] = useState(false);
+  const [enviado, setEnviado] = useState(false);
+  const [error, setError] = useState("");
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    alert("¡Mensaje enviado! Te contactaremos pronto.");
-    setFormData({
-      name: "",
-      phone: "",
-      email: "",
-      message: "",
-      contactPreference: "whatsapp",
-    });
+    setEnviando(true);
+    setError("");
+    try {
+      await createContacto({
+        nombre: formData.name,
+        email: formData.email,
+        celular: formData.phone,
+        mensaje: formData.message,
+        preferenciaContacto: formData.contactPreference,
+      });
+      setEnviado(true);
+      setFormData({ name: "", phone: "", email: "", message: "", contactPreference: "whatsapp" });
+    } catch {
+      setError("No pudimos enviar tu mensaje. Por favor intenta de nuevo.");
+    } finally {
+      setEnviando(false);
+    }
   };
 
   return (
@@ -57,6 +70,17 @@ export default function ContactPage() {
         <div className="container max-w-2xl">
           <Card>
             <CardContent className="p-8">
+              {enviado && (
+                <div className="flex items-center gap-3 p-4 mb-6 bg-sage/10 border border-sage/30 rounded-lg text-sage">
+                  <CheckCircle className="w-5 h-5 flex-shrink-0" />
+                  <p className="text-sm font-medium">¡Mensaje enviado! Te contactaremos en máximo 48 horas hábiles.</p>
+                </div>
+              )}
+              {error && (
+                <div className="p-4 mb-6 bg-red-50 border border-red-200 rounded-lg text-red-700 text-sm">
+                  {error}
+                </div>
+              )}
               <form onSubmit={handleSubmit} className="space-y-6">
                 <div>
                   <Label htmlFor="name">Nombre</Label>
@@ -148,9 +172,9 @@ export default function ContactPage() {
                   </div>
                 </div>
 
-                <Button type="submit" className="w-full" size="lg">
+                <Button type="submit" className="w-full" size="lg" disabled={enviando}>
                   <MessageCircle className="w-5 h-5 mr-2" />
-                  Enviar mensaje
+                  {enviando ? "Enviando..." : "Enviar mensaje"}
                 </Button>
 
                 <p className="text-xs text-stormy text-center">

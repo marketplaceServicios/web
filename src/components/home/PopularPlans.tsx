@@ -1,11 +1,15 @@
 import { Link } from "react-router-dom";
 import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
-import { getFeaturedPlans } from "@/data/mockData";
+import { type Plan } from "@/data/mockData";
 import { MapPin, Star } from "lucide-react";
 
-export default function PopularPlans() {
-  const plans = getFeaturedPlans().slice(0, 3);
+interface Props {
+  plans?: Plan[];
+}
+
+export default function PopularPlans({ plans: propPlans }: Props) {
+  const plans = (propPlans ?? []).slice(0, 3);
 
   const formatPrice = (price: number) => {
     return new Intl.NumberFormat("es-CO", {
