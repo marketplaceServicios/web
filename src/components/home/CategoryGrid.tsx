@@ -1,5 +1,6 @@
 import { Link } from "react-router-dom";
 import { categories as mockCategories, type Category } from "@/data/mockData";
+import { FALLBACK_IMAGE } from "@/lib/imageUtils";
 
 interface Props {
   categories?: Category[];
@@ -25,13 +26,13 @@ export default function CategoryGrid({ categories }: Props) {
           {displayCategories.map((category) => (
             <Link
               key={category.id}
-              to={`/planes?categoria=${category.id}`}
+              to={`/planes/categoria/${category.slug}`}
               className="group relative aspect-square rounded-xl overflow-hidden"
             >
               {/* Background Image */}
               <div
                 className="absolute inset-0 bg-cover bg-center transition-transform duration-300 group-hover:scale-110"
-                style={{ backgroundImage: `url(${category.image})` }}
+                style={{ backgroundImage: `url(${category.image}), url(${FALLBACK_IMAGE})` }}
               />
 
               {/* Overlay */}

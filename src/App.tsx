@@ -15,6 +15,7 @@ function App() {
         <Routes>
           <Route path="/" element={<HomePage />} />
           <Route path="/planes" element={<PlansPage />} />
+          <Route path="/planes/categoria/:slug" element={<PlansPage />} />
           <Route path="/categorias" element={<CategoriesPage />} />
           <Route path="/planes/:id" element={<DetailsPage />} />
           <Route path="/reserva/:id" element={<ReservationPage />} />

@@ -3,6 +3,7 @@ import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { type Plan } from "@/data/mockData";
 import { MapPin, Star } from "lucide-react";
+import { handleImgError } from "@/lib/imageUtils";
 
 interface Props {
   plans?: Plan[];
@@ -43,6 +44,7 @@ export default function PopularPlans({ plans: propPlans }: Props) {
                   src={plan.image}
                   alt={plan.title}
                   className="w-full h-full object-cover"
+                  onError={handleImgError}
                 />
                 <div className="absolute top-3 left-3 bg-sage text-white px-3 py-1 rounded-full text-xs font-medium">
                   {plan.category}

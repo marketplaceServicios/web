@@ -1,4 +1,4 @@
-import type { Category, Plan } from "@/data/mockData";
+import type { Category, Plan, Testimonial } from "@/data/mockData";
 
 const BASE_URL = "http://localhost:4000/api";
 
@@ -18,6 +18,7 @@ function mapCategory(c: any): Category {
   return {
     id: String(c.id),
     name: c.nombre,
+    slug: c.slug || "",
     image: c.imagen || "https://images.unsplash.com/photo-1507525428034-b723cf961d3e?w=400",
     description: c.descripcion || "",
   };
@@ -50,26 +51,78 @@ function mapPlan(p: any): Plan {
   };
 }
 
+function mapTestimonial(t: any): Testimonial {
+  return {
+    id: String(t.id),
+    name: t.nombre,
+    text: t.texto,
+    rating: t.rating,
+    avatar: t.foto || "https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=100",
+    city: t.ciudad || undefined,
+  };
+}
+
+// --- Types ---
+
+export interface PaginatedPlans {
+  data: Plan[];
+  total: number;
+  page: number;
+  totalPages: number;
+}
+
+export interface PlansFilterParams {
+  page?: number;
+  limit?: number;
+  categoriaId?: string;
+  q?: string;
+  precioMin?: number;
+  precioMax?: number;
+  destacado?: boolean;
+  esOferta?: boolean;
+}
+
 // --- API functions ---
+
+export async function getTestimonials(): Promise<Testimonial[]> {
+  const data = await request<any[]>("/testimonios");
+  return data.map(mapTestimonial);
+}
 
 export async function getCategories(): Promise<Category[]> {
   const data = await request<any[]>("/categorias");
   return data.filter((c) => c.activo).map(mapCategory);
 }
 
-export async function getPlans(): Promise<Plan[]> {
-  const data = await request<any[]>("/planes");
-  return data.map(mapPlan);
+export async function getPlans(params: PlansFilterParams = {}): Promise<PaginatedPlans> {
+  const qs = new URLSearchParams();
+  if (params.page) qs.set("page", String(params.page));
+  if (params.limit) qs.set("limit", String(params.limit));
+  if (params.categoriaId) qs.set("categoriaId", params.categoriaId);
+  if (params.q) qs.set("q", params.q);
+  if (params.precioMin) qs.set("precioMin", String(params.precioMin));
+  if (params.precioMax) qs.set("precioMax", String(params.precioMax));
+  if (params.destacado) qs.set("destacado", "true");
+  if (params.esOferta) qs.set("esOferta", "true");
+
+  const queryString = qs.toString();
+  const data = await request<any>(`/planes${queryString ? `?${queryString}` : ""}`);
+  return {
+    data: data.data.map(mapPlan),
+    total: data.total,
+    page: data.page,
+    totalPages: data.totalPages,
+  };
 }
 
 export async function getFeaturedPlans(): Promise<Plan[]> {
-  const data = await request<any[]>("/planes?destacado=true");
-  return data.map(mapPlan);
+  const data = await request<any>("/planes?destacado=true");
+  return data.data.map(mapPlan);
 }
 
 export async function getOfferPlans(): Promise<Plan[]> {
-  const data = await request<any[]>("/planes?esOferta=true");
-  return data.map(mapPlan);
+  const data = await request<any>("/planes?esOferta=true");
+  return data.data.map(mapPlan);
 }
 
 export async function getPlanById(id: string): Promise<Plan | null> {

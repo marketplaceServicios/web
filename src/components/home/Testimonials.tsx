@@ -1,8 +1,21 @@
+import { useState, useEffect } from "react";
 import { Card, CardContent } from "@/components/ui/card";
-import { testimonials } from "@/data/mockData";
+import { getTestimonials } from "@/lib/api";
+import type { Testimonial } from "@/data/mockData";
 import { Star, Quote } from "lucide-react";
+import { handleImgError } from "@/lib/imageUtils";
 
 export default function Testimonials() {
+  const [testimonials, setTestimonials] = useState<Testimonial[]>([]);
+
+  useEffect(() => {
+    getTestimonials()
+      .then(setTestimonials)
+      .catch(() => setTestimonials([]));
+  }, []);
+
+  if (testimonials.length === 0) return null;
+
   return (
     <section className="py-16 bg-white">
       <div className="container">
@@ -33,6 +46,7 @@ export default function Testimonials() {
                     src={testimonial.avatar}
                     alt={testimonial.name}
                     className="w-12 h-12 rounded-full object-cover mr-4"
+                    onError={handleImgError}
                   />
                   <div>
                     <p className="font-semibold text-primary">

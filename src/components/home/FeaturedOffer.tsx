@@ -2,6 +2,7 @@ import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { type Plan } from "@/data/mockData";
 import { Clock } from "lucide-react";
+import { handleImgError } from "@/lib/imageUtils";
 
 interface Props {
   offer?: Plan | null;
@@ -40,6 +41,7 @@ export default function FeaturedOffer({ offer }: Props) {
                 src={featuredOffer.image}
                 alt={featuredOffer.title}
                 className="absolute inset-0 w-full h-full object-cover"
+                onError={handleImgError}
               />
               {/* Badge */}
               <div className="absolute top-4 left-4 bg-golden text-white px-4 py-1 rounded-full text-sm font-semibold">
