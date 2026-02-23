@@ -3,6 +3,7 @@ import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Plan } from "@/data/mockData";
 import { MapPin } from "lucide-react";
+import { handleImgError } from "@/lib/imageUtils";
 
 interface PlanCardProps {
   plan: Plan;
@@ -32,6 +33,7 @@ export default function PlanCard({ plan, highlighted = false }: PlanCardProps) {
           src={plan.image}
           alt={plan.title}
           className="w-full h-full object-cover"
+          onError={handleImgError}
         />
         {plan.isOffer && (
           <div className="absolute top-3 right-3 bg-golden text-white px-3 py-1 rounded-full text-xs font-semibold">

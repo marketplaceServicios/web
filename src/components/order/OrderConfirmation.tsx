@@ -3,6 +3,7 @@ import { Plan } from "@/data/mockData";
 import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { CheckCircle, Users, MapPin, Copy } from "lucide-react";
+import { handleImgError } from "@/lib/imageUtils";
 import { useState } from "react";
 
 interface OrderConfirmationProps {
@@ -48,6 +49,7 @@ export default function OrderConfirmation({
             src={plan.image}
             alt={plan.title}
             className="w-full h-full object-cover"
+            onError={handleImgError}
           />
           <div className="absolute inset-0 bg-gradient-to-t from-primary/80 to-transparent" />
           <div className="absolute bottom-4 left-4 right-4">

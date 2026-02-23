@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { handleImgError } from "@/lib/imageUtils";
 
 interface ImageGalleryProps {
   images: string[];
@@ -16,6 +17,7 @@ export default function ImageGallery({ images, title }: ImageGalleryProps) {
           src={images[selectedImage]}
           alt={`${title} - Imagen ${selectedImage + 1}`}
           className="w-full h-full object-cover"
+          onError={handleImgError}
         />
       </div>
 
@@ -36,6 +38,7 @@ export default function ImageGallery({ images, title }: ImageGalleryProps) {
                 src={image}
                 alt={`${title} - Miniatura ${index + 1}`}
                 className="w-full h-full object-cover"
+                onError={handleImgError}
               />
             </button>
           ))}

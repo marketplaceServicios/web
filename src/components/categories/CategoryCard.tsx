@@ -1,6 +1,7 @@
 import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { Category } from "@/data/mockData";
+import { FALLBACK_IMAGE } from "@/lib/imageUtils";
 
 interface CategoryCardProps {
   category: Category;
@@ -12,7 +13,7 @@ export default function CategoryCard({ category }: CategoryCardProps) {
       {/* Background Image */}
       <div
         className="absolute inset-0 bg-cover bg-center transition-transform duration-500 group-hover:scale-110"
-        style={{ backgroundImage: `url(${category.image})` }}
+        style={{ backgroundImage: `url(${category.image}), url(${FALLBACK_IMAGE})` }}
       />
 
       {/* Overlay */}
@@ -22,7 +23,7 @@ export default function CategoryCard({ category }: CategoryCardProps) {
       <div className="absolute inset-0 flex flex-col justify-end p-6">
         <h3 className="text-2xl font-bold text-white mb-2">{category.name}</h3>
         <p className="text-white/80 text-sm mb-4">{category.description}</p>
-        <Link to={`/planes?categoria=${category.id}`}>
+        <Link to={`/planes/categoria/${category.slug}`}>
           <Button variant="outline" className="bg-white/10 border-white text-white hover:bg-white hover:text-forest">
             Ver planes
           </Button>

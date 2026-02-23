@@ -3,6 +3,7 @@ import { planImages } from "@/assets/images/planImages";
 export interface Category {
   id: string;
   name: string;
+  slug: string;
   image: string;
   description: string;
 }
@@ -49,30 +50,35 @@ export const categories: Category[] = [
   {
     id: "all",
     name: "Todos",
+    slug: "all",
     image: "https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=400",
     description: "Explora todas las experiencias Silver",
   },
   {
     id: "bodas",
     name: "Bodas Silver",
+    slug: "bodas-silver",
     image: "https://images.unsplash.com/photo-1519741497674-611481863552?w=400",
     description: "Celebraciones cuidadas, locaciones confiables y planificación sin estrés.",
   },
   {
     id: "viajes",
     name: "Viajes Silver",
+    slug: "viajes-silver",
     image: "https://images.unsplash.com/photo-1507525428034-b723cf961d3e?w=400",
     description: "Rutas tranquilas, tiempos humanos y experiencias con sentido.",
   },
   {
     id: "celebraciones",
     name: "Celebraciones",
+    slug: "celebraciones",
     image: "https://images.unsplash.com/photo-1533929736458-ca588d08c8be?w=400",
     description: "Aniversarios, renovación de votos, encuentros familiares.",
   },
   {
     id: "servicios",
     name: "Servicios",
+    slug: "servicios",
     image: "https://images.unsplash.com/photo-1414235077428-338989a2e8c0?w=400",
     description: "Fotografía, música, catering y aliados verificados para tu evento o viaje.",
   },
@@ -308,33 +314,6 @@ export const plans: Plan[] = [
     amenities: ["photos"],
     isOffer: true,
     datoClave: "Aliado verificado",
-  },
-];
-
-export const testimonials: Testimonial[] = [
-  {
-    id: "1",
-    name: "María González",
-    avatar: "https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=100",
-    text: "Lo que más me gustó fue la claridad. Sabíamos exactamente qué esperar, los accesos, los tiempos y el acompañamiento.",
-    rating: 5,
-    city: "Bogotá",
-  },
-  {
-    id: "2",
-    name: "Carlos Rodríguez",
-    avatar: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=100",
-    text: "Mi mamá se sintió cuidada desde el primer mensaje. El equipo fue atento y resolvió todas nuestras dudas sin afán.",
-    rating: 5,
-    city: "Medellín",
-  },
-  {
-    id: "3",
-    name: "Ana Martínez",
-    avatar: "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=100",
-    text: "El acompañamiento fue excepcional. Nos sentimos tranquilos en todo momento y la experiencia superó nuestras expectativas.",
-    rating: 5,
-    city: "Manizales",
   },
 ];
 
