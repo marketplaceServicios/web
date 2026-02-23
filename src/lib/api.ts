@@ -46,6 +46,7 @@ function mapPlan(p: any): Plan {
     highlighted: p.destacado || false,
     isOffer: p.esOferta || false,
     datoClave: p.datoClave || undefined,
+    disponibilidad: p.disponibilidad || null,
   };
 }
 
@@ -86,8 +87,25 @@ export async function createReservation(body: {
   turistas: any[];
   datosFacturacion: any;
   metodoPago: string;
-}) {
+}): Promise<{ reserva: any; checkoutUrl: string }> {
   return request("/reservas", {
+    method: "POST",
+    body: JSON.stringify(body),
+  });
+}
+
+export async function getReservaByCodigo(codigo: string): Promise<any> {
+  return request(`/reservas/codigo/${codigo}`);
+}
+
+export async function createContacto(body: {
+  nombre: string;
+  email: string;
+  celular: string;
+  mensaje: string;
+  preferenciaContacto?: string;
+}): Promise<void> {
+  await request("/contacto", {
     method: "POST",
     body: JSON.stringify(body),
   });

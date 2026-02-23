@@ -2,7 +2,7 @@ import { Link } from "react-router-dom";
 import { Plan } from "@/data/mockData";
 import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
-import { CheckCircle, Calendar, Users, MapPin, Copy } from "lucide-react";
+import { CheckCircle, Users, MapPin, Copy } from "lucide-react";
 import { useState } from "react";
 
 interface OrderConfirmationProps {
@@ -17,14 +17,6 @@ export default function OrderConfirmation({
   reservationCode,
 }: OrderConfirmationProps) {
   const [copied, setCopied] = useState(false);
-
-  const formatDate = (dateStr: string) => {
-    return new Date(dateStr).toLocaleDateString("es-CO", {
-      day: "numeric",
-      month: "long",
-      year: "numeric",
-    });
-  };
 
   const copyCode = () => {
     navigator.clipboard.writeText(reservationCode);
@@ -72,12 +64,6 @@ export default function OrderConfirmation({
             <div className="flex items-center gap-3">
               <MapPin className="w-5 h-5 text-golden" />
               <span className="text-gray-700">{plan.location}</span>
-            </div>
-            <div className="flex items-center gap-3">
-              <Calendar className="w-5 h-5 text-golden" />
-              <span className="text-gray-700">
-                {formatDate(plan.startDate)} - {formatDate(plan.endDate)}
-              </span>
             </div>
             <div className="flex items-center gap-3">
               <Users className="w-5 h-5 text-golden" />

@@ -13,6 +13,13 @@ export default function DetailsPage() {
   const { id } = useParams<{ id: string }>();
   const [plan, setPlan] = useState<Plan | null>(null);
   const [loading, setLoading] = useState(true);
+  const [selectedDate, setSelectedDate] = useState<string | null>(null);
+  const [selectedPrice, setSelectedPrice] = useState<number>(0);
+
+  const handleDateSelect = (isoDate: string, price: number) => {
+    setSelectedDate(isoDate);
+    setSelectedPrice(price);
+  };
 
   useEffect(() => {
     if (!id) { setLoading(false); return; }
@@ -72,7 +79,12 @@ export default function DetailsPage() {
               </div>
 
               {/* Calendar */}
-              <PriceCalendar price={plan.price} startDate={plan.startDate} />
+              <PriceCalendar
+                price={plan.price}
+                disponibilidad={plan.disponibilidad}
+                selectedDate={selectedDate}
+                onDateSelect={handleDateSelect}
+              />
 
               {/* Quote Form */}
               <QuoteForm planId={plan.id} planTitle={plan.title} />
@@ -80,7 +92,11 @@ export default function DetailsPage() {
 
             {/* Sidebar */}
             <div className="lg:col-span-1">
-              <PlanIncludes plan={plan} />
+              <PlanIncludes
+                plan={plan}
+                selectedDate={selectedDate}
+                selectedPrice={selectedPrice || plan.price}
+              />
             </div>
           </div>
         </div>

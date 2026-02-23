@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { useParams, Navigate, useNavigate } from "react-router-dom";
+import { useParams, Navigate, useSearchParams } from "react-router-dom";
 import { getPlanById, createReservation } from "@/lib/api";
 import type { Plan } from "@/data/mockData";
 import TouristForm from "@/components/reservation/TouristForm";
@@ -11,7 +11,9 @@ import { Plus, Minus } from "lucide-react";
 
 export default function ReservationPage() {
   const { id } = useParams<{ id: string }>();
-  const navigate = useNavigate();
+  const [searchParams] = useSearchParams();
+  const selectedDate = searchParams.get("fecha") || null;
+  const selectedPrice = searchParams.get("precio") ? Number(searchParams.get("precio")) : null;
 
   const [plan, setPlan] = useState<Plan | null>(null);
   const [loading, setLoading] = useState(true);
@@ -79,13 +81,7 @@ export default function ReservationPage() {
         datosFacturacion: { ...billing, ...contact },
         metodoPago: selectedPayment,
       });
-      navigate("/orden", {
-        state: {
-          plan,
-          numTourists,
-          reservationCode: result.reserva?.codigo || `VS-${Date.now().toString(36).toUpperCase()}`,
-        },
-      });
+      window.location.href = result.checkoutUrl;
     } catch {
       setSubmitting(false);
       alert("Ocurrió un error al procesar tu reserva. Por favor intenta de nuevo.");
@@ -158,6 +154,8 @@ export default function ReservationPage() {
               onPaymentChange={setSelectedPayment}
               onSubmit={handleSubmit}
               submitting={submitting}
+              selectedDate={selectedDate}
+              selectedPrice={selectedPrice}
             />
           </div>
         </div>

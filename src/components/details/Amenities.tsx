@@ -1,22 +1,46 @@
-import { Bus, Utensils, Sparkles, Camera, UserCheck } from "lucide-react";
+import {
+  Bus, Utensils, UserCheck, Camera, Home, Sparkles,
+  Heart, Wifi, Shield, Coffee, Waves, Car,
+  Music, ShoppingBag, Accessibility, Star,
+  Compass, Leaf, BookOpen, Activity,
+} from "lucide-react";
 
 interface AmenitiesProps {
   amenities: string[];
 }
 
 const amenityIcons: Record<string, { icon: React.ElementType; label: string }> = {
-  transport: { icon: Bus, label: "Transporte" },
-  restaurant: { icon: Utensils, label: "Alimentación" },
-  spa: { icon: Sparkles, label: "SPA" },
-  photos: { icon: Camera, label: "Fotos" },
-  guide: { icon: UserCheck, label: "Guía turístico" },
+  transport:     { icon: Bus,           label: "Transporte" },
+  food:          { icon: Utensils,      label: "Alimentación" },
+  guide:         { icon: UserCheck,     label: "Guía turístico" },
+  photos:        { icon: Camera,        label: "Fotos" },
+  hotel:         { icon: Home,          label: "Alojamiento" },
+  breakfast:     { icon: Coffee,        label: "Desayuno" },
+  spa:           { icon: Sparkles,      label: "SPA" },
+  pool:          { icon: Waves,         label: "Piscina" },
+  medical:       { icon: Heart,         label: "Asistencia médica" },
+  insurance:     { icon: Shield,        label: "Seguro de viaje" },
+  wifi:          { icon: Wifi,          label: "WiFi" },
+  parking:       { icon: Car,           label: "Parqueadero" },
+  entertainment: { icon: Music,         label: "Entretenimiento" },
+  shopping:      { icon: ShoppingBag,   label: "Compras" },
+  accessibility: { icon: Accessibility, label: "Silla de ruedas" },
+  tour:          { icon: Compass,       label: "Recorrido guiado" },
+  wellness:      { icon: Leaf,          label: "Bienestar" },
+  activities:    { icon: Activity,      label: "Actividades" },
+  workshop:      { icon: BookOpen,      label: "Taller / Clase" },
+  dinner:        { icon: Star,          label: "Cena incluida" },
+  // legacy keys (mockData)
+  restaurant:    { icon: Utensils,      label: "Alimentación" },
 };
 
 export default function Amenities({ amenities }: AmenitiesProps) {
+  if (!amenities || amenities.length === 0) return null;
+
   return (
     <div className="pt-4 border-t">
       <h2 className="text-xl font-semibold text-forest mb-4">Servicios incluidos</h2>
-      <div className="flex flex-wrap gap-4">
+      <div className="flex flex-wrap gap-3">
         {amenities.map((amenity) => {
           const config = amenityIcons[amenity];
           if (!config) return null;
