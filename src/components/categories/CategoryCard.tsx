@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { Category } from "@/data/mockData";
-import { FALLBACK_IMAGE } from "@/lib/imageUtils";
+import { handleImgError } from "@/lib/imageUtils";
 
 interface CategoryCardProps {
   category: Category;
@@ -10,10 +10,11 @@ interface CategoryCardProps {
 export default function CategoryCard({ category }: CategoryCardProps) {
   return (
     <div className="relative group rounded-xl overflow-hidden aspect-[4/3]">
-      {/* Background Image */}
-      <div
-        className="absolute inset-0 bg-cover bg-center transition-transform duration-500 group-hover:scale-110"
-        style={{ backgroundImage: `url(${category.image}), url(${FALLBACK_IMAGE})` }}
+      <img
+        src={category.image}
+        alt={category.name}
+        className="absolute inset-0 w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
+        onError={handleImgError}
       />
 
       {/* Overlay */}
