@@ -19,11 +19,11 @@ const LIMIT = 20;
 
 const PRICE_RANGES = [
   { key: "all", label: "Todos los precios", min: undefined, max: undefined },
-  { key: "0-500k", label: "$0 - $500K", min: 0, max: 500000 },
-  { key: "500k-1m", label: "$500K - $1M", min: 500000, max: 1000000 },
-  { key: "1m-2m", label: "$1M - $2M", min: 1000000, max: 2000000 },
-  { key: "2m-5m", label: "$2M - $5M", min: 2000000, max: 5000000 },
-  { key: "5m+", label: "$5M+", min: 5000000, max: undefined },
+  { key: "0-500k", label: "Hasta $500.000", min: 0, max: 500000 },
+  { key: "500k-1m", label: "$500.000 - $1.000.000", min: 500000, max: 1000000 },
+  { key: "1m-2m", label: "$1.000.000 - $2.000.000", min: 1000000, max: 2000000 },
+  { key: "2m-5m", label: "$2.000.000 - $5.000.000", min: 2000000, max: 5000000 },
+  { key: "5m+", label: "Más de $5.000.000", min: 5000000, max: undefined },
 ] as const;
 
 const CATEGORY_EMOJIS: Record<string, string> = {
@@ -200,7 +200,7 @@ export default function PlansPage() {
               <Search className="absolute left-4 top-1/2 -translate-y-1/2 h-5 w-5 text-stormy/50" />
               <input
                 type="text"
-                placeholder="\u{1F4CD} \u00BFA d\u00F3nde quieres ir? Ej: Cartagena, San Andr\u00E9s..."
+                placeholder="¿A dónde quieres ir? Ej: Cartagena, San Andrés..."
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
                 className="w-full pl-11 pr-4 py-3 rounded-xl border border-gray-200 bg-gray-50 text-primary placeholder:text-stormy/50 focus:outline-none focus:ring-2 focus:ring-golden/50 focus:bg-white transition-colors"
@@ -215,8 +215,8 @@ export default function PlansPage() {
                 {PRICE_RANGES.map((range) => (
                   <option key={range.key} value={range.key}>
                     {range.key === "all"
-                      ? "\u{1F3F7}\uFE0F Precio: Todos los rangos"
-                      : `\u{1F3F7}\uFE0F Precio: ${range.label}`}
+                      ? "Precio: Todos los rangos"
+                      : `Precio: ${range.label}`}
                   </option>
                 ))}
               </select>
