@@ -9,6 +9,7 @@ const navLinks = [
   { href: "/", label: "Inicio" },
   { href: "/planes", label: "Planes" },
   { href: "/categorias", label: "Categorías" },
+  { href: "/experiencias-360", label: "Experiencias 360" },
   { href: "/contacto", label: "Contáctanos" },
 ];
 
