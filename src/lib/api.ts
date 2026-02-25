@@ -90,6 +90,7 @@ export interface QuickLink {
   id: string;
   title: string;
   url: string;
+  openInNewTab: boolean;
 }
 
 function mapQuickLink(e: any): QuickLink {
@@ -97,6 +98,7 @@ function mapQuickLink(e: any): QuickLink {
     id: String(e.id),
     title: e.titulo,
     url: e.url,
+    openInNewTab: e.abrirNuevaPestana || false,
   };
 }
 

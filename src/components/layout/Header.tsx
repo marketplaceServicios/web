@@ -1,8 +1,7 @@
-import { Link, useLocation } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import { Search, Menu, X } from "lucide-react";
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
 import logoHorizontal from "@/assets/logos/horizontal-azul.png";
 
 const navLinks = [
@@ -16,7 +15,19 @@ const navLinks = [
 export default function Header() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isSearchOpen, setIsSearchOpen] = useState(false);
+  const [searchQuery, setSearchQuery] = useState("");
   const location = useLocation();
+  const navigate = useNavigate();
+
+  const handleSearch = (e: React.FormEvent) => {
+    e.preventDefault();
+    if (searchQuery.trim()) {
+      navigate(`/buscar?q=${encodeURIComponent(searchQuery.trim())}`);
+      setSearchQuery("");
+      setIsSearchOpen(false);
+      setIsMenuOpen(false);
+    }
+  };
 
   return (
     <header className="bg-white shadow-sm sticky top-0 z-50">
@@ -53,20 +64,33 @@ export default function Header() {
             {/* Search */}
             <div className="hidden md:flex items-center">
               {isSearchOpen ? (
-                <div className="flex items-center">
-                  <Input
+                <form onSubmit={handleSearch} className="flex items-center">
+                  <input
                     type="search"
-                    placeholder="Busca una experiencia o destino…"
-                    className="w-64"
+                    value={searchQuery}
+                    onChange={(e) => setSearchQuery(e.target.value)}
+                    placeholder="Busca una experiencia o destino..."
+                    className="w-64 h-10 pl-4 pr-2 rounded-l-xl border border-r-0 border-gray-200 bg-gray-50 text-sm text-primary placeholder:text-stormy/50 focus:outline-none focus:ring-2 focus:ring-golden/50 focus:bg-white"
+                    autoFocus
                   />
+                  <button
+                    type="submit"
+                    className="h-10 px-3 bg-golden text-white rounded-r-xl hover:bg-golden-600 transition-colors"
+                  >
+                    <Search className="h-4 w-4" />
+                  </button>
                   <Button
                     variant="ghost"
                     size="icon"
-                    onClick={() => setIsSearchOpen(false)}
+                    type="button"
+                    onClick={() => {
+                      setIsSearchOpen(false);
+                      setSearchQuery("");
+                    }}
                   >
                     <X className="h-5 w-5" />
                   </Button>
-                </div>
+                </form>
               ) : (
                 <Button
                   variant="ghost"
@@ -99,16 +123,18 @@ export default function Header() {
           <div className="md:hidden border-t py-4">
             <div className="flex flex-col space-y-4">
               {/* Mobile Search */}
-              <div className="px-2">
+              <form onSubmit={handleSearch} className="px-2">
                 <div className="relative">
                   <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-gray-400" />
-                  <Input
+                  <input
                     type="search"
-                    placeholder="Busca una experiencia o destino…"
-                    className="pl-10"
+                    value={searchQuery}
+                    onChange={(e) => setSearchQuery(e.target.value)}
+                    placeholder="Busca una experiencia o destino..."
+                    className="w-full h-10 pl-10 pr-4 rounded-xl border border-gray-200 bg-gray-50 text-sm text-primary placeholder:text-stormy/50 focus:outline-none focus:ring-2 focus:ring-golden/50"
                   />
                 </div>
-              </div>
+              </form>
 
               {/* Mobile Links */}
               {navLinks.map((link) => (

@@ -5,9 +5,9 @@ import logoBlanco from "@/assets/logos/blanco.png";
 import { getQuickLinks, type QuickLink } from "@/lib/api";
 
 const fallbackLinks: QuickLink[] = [
-  { id: "1", title: "Inicio", url: "/" },
-  { id: "2", title: "Experiencias", url: "/planes" },
-  { id: "3", title: "Contáctanos", url: "/contacto" },
+  { id: "1", title: "Inicio", url: "/", openInNewTab: false },
+  { id: "2", title: "Experiencias", url: "/planes", openInNewTab: false },
+  { id: "3", title: "Contáctanos", url: "/contacto", openInNewTab: false },
 ];
 
 export default function Footer() {
@@ -20,8 +20,6 @@ export default function Footer() {
       })
       .catch(() => {});
   }, []);
-
-  const isExternal = (url: string) => url.startsWith("http");
 
   return (
     <footer id="contacto" className="bg-primary text-white">
@@ -48,7 +46,7 @@ export default function Footer() {
             <ul className="space-y-2">
               {quickLinks.map((link) => (
                 <li key={link.id}>
-                  {isExternal(link.url) ? (
+                  {link.openInNewTab ? (
                     <a
                       href={link.url}
                       target="_blank"
