@@ -62,6 +62,28 @@ function mapTestimonial(t: any): Testimonial {
   };
 }
 
+// --- Experience 360 ---
+
+export interface Experience360 {
+  id: string;
+  title: string;
+  description: string;
+  iframeSrc: string;
+  thumbnail: string;
+}
+
+function mapExperience360(e: any): Experience360 {
+  return {
+    id: String(e.id),
+    title: e.titulo,
+    description: e.descripcion || "",
+    iframeSrc: e.iframeSrc,
+    thumbnail:
+      e.thumbnail ||
+      "https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=800",
+  };
+}
+
 // --- Types ---
 
 export interface PaginatedPlans {
@@ -87,6 +109,11 @@ export interface PlansFilterParams {
 export async function getTestimonials(): Promise<Testimonial[]> {
   const data = await request<any[]>("/testimonios");
   return data.map(mapTestimonial);
+}
+
+export async function getExperiencias360(): Promise<Experience360[]> {
+  const data = await request<any[]>("/experiencias360");
+  return data.map(mapExperience360);
 }
 
 export async function getCategories(): Promise<Category[]> {

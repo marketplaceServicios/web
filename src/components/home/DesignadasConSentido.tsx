@@ -17,8 +17,8 @@ export default function DesignadasConSentido() {
         <div className="max-w-4xl mx-auto rounded-2xl overflow-hidden shadow-lg">
           <VideoPlayer
             src="/assets/economia-silver.mp4"
+            poster="/assets/cover-economia.png"
             className="aspect-video"
-            loop
           />
         </div>
       </div>

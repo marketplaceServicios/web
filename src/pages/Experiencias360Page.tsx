@@ -1,14 +1,20 @@
 import { useState, useEffect, useCallback } from "react";
-import { X } from "lucide-react";
+import { X, Loader2 } from "lucide-react";
 import Experience360Card from "@/components/experiencias360/Experience360Card";
-import {
-  experiences360,
-  type Experience360,
-} from "@/data/experiences360Data";
+import { getExperiencias360, type Experience360 } from "@/lib/api";
 
 export default function Experiencias360Page() {
+  const [experiences360, setExperiences360] = useState<Experience360[]>([]);
+  const [loading, setLoading] = useState(true);
   const [selectedExperience, setSelectedExperience] =
     useState<Experience360 | null>(null);
+
+  useEffect(() => {
+    getExperiencias360()
+      .then(setExperiences360)
+      .catch(() => setExperiences360([]))
+      .finally(() => setLoading(false));
+  }, []);
 
   useEffect(() => {
     if (selectedExperience) {
@@ -65,15 +71,25 @@ export default function Experiencias360Page() {
       {/* Cards Grid */}
       <section className="py-16 bg-cream">
         <div className="container">
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-            {experiences360.map((experience) => (
-              <Experience360Card
-                key={experience.id}
-                experience={experience}
-                onClick={() => setSelectedExperience(experience)}
-              />
-            ))}
-          </div>
+          {loading ? (
+            <div className="flex justify-center py-12">
+              <Loader2 className="w-8 h-8 animate-spin text-golden" />
+            </div>
+          ) : experiences360.length === 0 ? (
+            <p className="text-center text-stormy py-12">
+              No hay experiencias disponibles en este momento.
+            </p>
+          ) : (
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+              {experiences360.map((experience) => (
+                <Experience360Card
+                  key={experience.id}
+                  experience={experience}
+                  onClick={() => setSelectedExperience(experience)}
+                />
+              ))}
+            </div>
+          )}
         </div>
       </section>
 

@@ -1,5 +1,5 @@
 import { Eye } from "lucide-react";
-import type { Experience360 } from "@/data/experiences360Data";
+import type { Experience360 } from "@/lib/api";
 import { handleImgError } from "@/lib/imageUtils";
 
 interface Experience360CardProps {
