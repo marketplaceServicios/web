@@ -2,21 +2,55 @@ import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { Phone } from "lucide-react";
 import logoBlanco from "@/assets/logos/blanco.png";
-import { getQuickLinks, type QuickLink } from "@/lib/api";
+import { getQuickLinks, getLegalLinks, type QuickLink } from "@/lib/api";
 
-const fallbackLinks: QuickLink[] = [
+const fallbackQuickLinks: QuickLink[] = [
   { id: "1", title: "Inicio", url: "/", openInNewTab: false },
   { id: "2", title: "Experiencias", url: "/planes", openInNewTab: false },
   { id: "3", title: "Contáctanos", url: "/contacto", openInNewTab: false },
 ];
 
+const fallbackLegalLinks: QuickLink[] = [
+  { id: "l1", title: "Términos y condiciones", url: "#", openInNewTab: false },
+  { id: "l2", title: "Política de privacidad", url: "#", openInNewTab: false },
+];
+
+function FooterLink({ link }: { link: QuickLink }) {
+  if (link.openInNewTab) {
+    return (
+      <a
+        href={link.url}
+        target="_blank"
+        rel="noopener noreferrer"
+        className="text-cream/70 hover:text-golden transition-colors text-sm"
+      >
+        {link.title}
+      </a>
+    );
+  }
+  return (
+    <Link
+      to={link.url}
+      className="text-cream/70 hover:text-golden transition-colors text-sm"
+    >
+      {link.title}
+    </Link>
+  );
+}
+
 export default function Footer() {
-  const [quickLinks, setQuickLinks] = useState<QuickLink[]>(fallbackLinks);
+  const [quickLinks, setQuickLinks] = useState<QuickLink[]>(fallbackQuickLinks);
+  const [legalLinks, setLegalLinks] = useState<QuickLink[]>(fallbackLegalLinks);
 
   useEffect(() => {
     getQuickLinks()
       .then((links) => {
         if (links.length > 0) setQuickLinks(links);
+      })
+      .catch(() => {});
+    getLegalLinks()
+      .then((links) => {
+        if (links.length > 0) setLegalLinks(links);
       })
       .catch(() => {});
   }, []);
@@ -46,23 +80,7 @@ export default function Footer() {
             <ul className="space-y-2">
               {quickLinks.map((link) => (
                 <li key={link.id}>
-                  {link.openInNewTab ? (
-                    <a
-                      href={link.url}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="text-cream/70 hover:text-golden transition-colors text-sm"
-                    >
-                      {link.title}
-                    </a>
-                  ) : (
-                    <Link
-                      to={link.url}
-                      className="text-cream/70 hover:text-golden transition-colors text-sm"
-                    >
-                      {link.title}
-                    </Link>
-                  )}
+                  <FooterLink link={link} />
                 </li>
               ))}
             </ul>
@@ -97,18 +115,9 @@ export default function Footer() {
             © {new Date().getFullYear()} Vive Silver. Todos los derechos reservados.
           </p>
           <div className="flex space-x-6 mt-4 md:mt-0">
-            <Link
-              to="#"
-              className="text-cream/60 hover:text-golden transition-colors text-sm"
-            >
-              Términos y condiciones
-            </Link>
-            <Link
-              to="#"
-              className="text-cream/60 hover:text-golden transition-colors text-sm"
-            >
-              Política de privacidad
-            </Link>
+            {legalLinks.map((link) => (
+              <FooterLink key={link.id} link={{ ...link, openInNewTab: link.openInNewTab }} />
+            ))}
           </div>
         </div>
       </div>

@@ -130,7 +130,12 @@ export async function getTestimonials(): Promise<Testimonial[]> {
 }
 
 export async function getQuickLinks(): Promise<QuickLink[]> {
-  const data = await request<any[]>("/enlaces-rapidos");
+  const data = await request<any[]>("/enlaces-rapidos?tipo=rapido");
+  return data.map(mapQuickLink);
+}
+
+export async function getLegalLinks(): Promise<QuickLink[]> {
+  const data = await request<any[]>("/enlaces-rapidos?tipo=legal");
   return data.map(mapQuickLink);
 }
 
