@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import HeroBanner from "@/components/home/HeroBanner";
+import HeroSlider from "@/components/home/HeroSlider";
 import CategoryGrid from "@/components/home/CategoryGrid";
 import DesignadasConSentido from "@/components/home/DesignadasConSentido";
 import FeaturedOffer from "@/components/home/FeaturedOffer";
@@ -21,7 +21,7 @@ export default function HomePage() {
 
   return (
     <div>
-      <HeroBanner />
+      <HeroSlider />
       <CategoryGrid categories={categories} />
       <DesignadasConSentido />
       <FeaturedOffer offer={offerPlan} />

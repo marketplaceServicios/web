@@ -86,6 +86,15 @@ export default {
         serif: ['Baskervville', 'Georgia', 'serif'],
         sans: ['Gilroy', 'system-ui', 'sans-serif'],
       },
+      keyframes: {
+        'slide-progress': {
+          from: { width: '0%' },
+          to: { width: '100%' },
+        },
+      },
+      animation: {
+        'slide-progress': 'slide-progress 7s linear',
+      },
     },
   },
   plugins: [],
