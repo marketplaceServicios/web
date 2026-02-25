@@ -203,14 +203,14 @@ export default function PlansPage() {
                 placeholder="¿A dónde quieres ir? Ej: Cartagena, San Andrés..."
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
-                className="w-full pl-11 pr-4 py-3 rounded-xl border border-gray-200 bg-gray-50 text-primary placeholder:text-stormy/50 focus:outline-none focus:ring-2 focus:ring-golden/50 focus:bg-white transition-colors"
+                className="w-full h-12 pl-11 pr-4 rounded-xl border border-gray-200 bg-gray-50 text-primary placeholder:text-stormy/50 focus:outline-none focus:ring-2 focus:ring-golden/50 focus:bg-white transition-colors"
               />
             </div>
             <div className="relative">
               <select
                 value={precioRange}
                 onChange={(e) => setPrecioRange(e.target.value)}
-                className="w-full appearance-none pl-4 pr-10 py-3 rounded-xl border border-gray-200 bg-gray-50 text-primary text-sm font-medium focus:outline-none focus:ring-2 focus:ring-golden/50 focus:bg-white transition-colors cursor-pointer"
+                className="w-full h-12 appearance-none pl-4 pr-10 rounded-xl border border-gray-200 bg-gray-50 text-primary text-sm font-medium focus:outline-none focus:ring-2 focus:ring-golden/50 focus:bg-white transition-colors cursor-pointer"
               >
                 {PRICE_RANGES.map((range) => (
                   <option key={range.key} value={range.key}>

@@ -1,8 +1,28 @@
+import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { Phone } from "lucide-react";
 import logoBlanco from "@/assets/logos/blanco.png";
+import { getQuickLinks, type QuickLink } from "@/lib/api";
+
+const fallbackLinks: QuickLink[] = [
+  { id: "1", title: "Inicio", url: "/" },
+  { id: "2", title: "Experiencias", url: "/planes" },
+  { id: "3", title: "Contáctanos", url: "/contacto" },
+];
 
 export default function Footer() {
+  const [quickLinks, setQuickLinks] = useState<QuickLink[]>(fallbackLinks);
+
+  useEffect(() => {
+    getQuickLinks()
+      .then((links) => {
+        if (links.length > 0) setQuickLinks(links);
+      })
+      .catch(() => {});
+  }, []);
+
+  const isExternal = (url: string) => url.startsWith("http");
+
   return (
     <footer id="contacto" className="bg-primary text-white">
       <div className="container py-12">
@@ -26,30 +46,27 @@ export default function Footer() {
           <div>
             <h3 className="font-serif text-lg mb-4">Enlaces rápidos</h3>
             <ul className="space-y-2">
-              <li>
-                <Link
-                  to="/"
-                  className="text-cream/70 hover:text-golden transition-colors text-sm"
-                >
-                  Inicio
-                </Link>
-              </li>
-              <li>
-                <Link
-                  to="/planes"
-                  className="text-cream/70 hover:text-golden transition-colors text-sm"
-                >
-                  Experiencias
-                </Link>
-              </li>
-              <li>
-                <Link
-                  to="/contacto"
-                  className="text-cream/70 hover:text-golden transition-colors text-sm"
-                >
-                  Contáctanos
-                </Link>
-              </li>
+              {quickLinks.map((link) => (
+                <li key={link.id}>
+                  {isExternal(link.url) ? (
+                    <a
+                      href={link.url}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="text-cream/70 hover:text-golden transition-colors text-sm"
+                    >
+                      {link.title}
+                    </a>
+                  ) : (
+                    <Link
+                      to={link.url}
+                      className="text-cream/70 hover:text-golden transition-colors text-sm"
+                    >
+                      {link.title}
+                    </Link>
+                  )}
+                </li>
+              ))}
             </ul>
           </div>
 
@@ -66,7 +83,12 @@ export default function Footer() {
                 <Phone className="h-4 w-4" />
                 <span>Quiero hablar con un agente</span>
               </a>
-              <p className="text-cream/70 text-sm">info@vivesilver.com</p>
+              <a
+                href="mailto:info@vivesilver.com"
+                className="text-cream/70 hover:text-golden transition-colors text-sm"
+              >
+                info@vivesilver.com
+              </a>
             </div>
           </div>
         </div>

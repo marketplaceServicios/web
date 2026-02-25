@@ -84,6 +84,22 @@ function mapExperience360(e: any): Experience360 {
   };
 }
 
+// --- Enlaces Rápidos ---
+
+export interface QuickLink {
+  id: string;
+  title: string;
+  url: string;
+}
+
+function mapQuickLink(e: any): QuickLink {
+  return {
+    id: String(e.id),
+    title: e.titulo,
+    url: e.url,
+  };
+}
+
 // --- Types ---
 
 export interface PaginatedPlans {
@@ -109,6 +125,11 @@ export interface PlansFilterParams {
 export async function getTestimonials(): Promise<Testimonial[]> {
   const data = await request<any[]>("/testimonios");
   return data.map(mapTestimonial);
+}
+
+export async function getQuickLinks(): Promise<QuickLink[]> {
+  const data = await request<any[]>("/enlaces-rapidos");
+  return data.map(mapQuickLink);
 }
 
 export async function getExperiencias360(): Promise<Experience360[]> {
