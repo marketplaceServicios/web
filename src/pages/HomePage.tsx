@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import HeroBanner from "@/components/home/HeroBanner";
 import CategoryGrid from "@/components/home/CategoryGrid";
+import DesignadasConSentido from "@/components/home/DesignadasConSentido";
 import FeaturedOffer from "@/components/home/FeaturedOffer";
 import PopularPlans from "@/components/home/PopularPlans";
 import Testimonials from "@/components/home/Testimonials";
@@ -22,6 +23,7 @@ export default function HomePage() {
     <div>
       <HeroBanner />
       <CategoryGrid categories={categories} />
+      <DesignadasConSentido />
       <FeaturedOffer offer={offerPlan} />
       <PopularPlans plans={featuredPlans} />
       <Testimonials />
