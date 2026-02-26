@@ -28,6 +28,8 @@ export interface Plan {
   amenities: string[];
   highlighted?: boolean;
   isOffer?: boolean;
+  providerName?: string;
+  providerLogo?: string;
   datoClave?: string;
   disponibilidad?: {
     tipo: 'siempre' | 'dias_semana' | 'fechas_especificas';

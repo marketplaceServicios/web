@@ -46,6 +46,8 @@ function mapPlan(p: any): Plan {
     amenities: p.amenidades || [],
     highlighted: p.destacado || false,
     isOffer: p.esOferta || false,
+    providerName: p.proveedor?.nombreEmpresa || undefined,
+    providerLogo: p.proveedor?.logo || undefined,
     datoClave: p.datoClave || undefined,
     disponibilidad: p.disponibilidad || null,
   };

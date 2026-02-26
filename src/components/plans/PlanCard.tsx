@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
 import { Plan } from "@/data/mockData";
-import { MapPin, Heart } from "lucide-react";
+import { MapPin, Heart, Building2 } from "lucide-react";
 import { handleImgError } from "@/lib/imageUtils";
 
 interface PlanCardProps {
@@ -72,6 +72,14 @@ export default function PlanCard({ plan }: PlanCardProps) {
         <h3 className="font-serif font-bold text-primary text-base leading-snug">
           {plan.title}
         </h3>
+
+        {/* Provider */}
+        {plan.providerName && (
+          <div className="flex items-center gap-1 text-xs text-stormy/70">
+            <Building2 className="w-3 h-3" />
+            <span>{plan.providerName}</span>
+          </div>
+        )}
 
         {/* Description */}
         {plan.description && (
