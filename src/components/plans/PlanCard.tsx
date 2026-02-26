@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
 import { Plan } from "@/data/mockData";
-import { MapPin, Heart, Building2 } from "lucide-react";
+import { MapPin, Building2 } from "lucide-react";
 import { handleImgError } from "@/lib/imageUtils";
 
 interface PlanCardProps {
@@ -30,11 +30,6 @@ export default function PlanCard({ plan }: PlanCardProps) {
           className="w-full aspect-[4/3] object-cover group-hover:scale-105 transition-transform duration-300"
           onError={handleImgError}
         />
-
-        {/* Heart - top left */}
-        <div className="absolute top-3 left-3 bg-white/80 backdrop-blur-sm rounded-full p-1.5">
-          <Heart className="w-4 h-4 text-stormy/70" />
-        </div>
 
         {/* Rating - top right */}
         {plan.rating > 0 && (
