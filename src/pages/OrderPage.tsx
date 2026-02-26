@@ -8,6 +8,13 @@ interface OrderState {
   plan: Plan;
   numTourists: number;
   reservationCode: string;
+  turistas?: any[];
+  subtotal?: number;
+  impuestos?: number;
+  total?: number;
+  selectedDate?: string | null;
+  cobrarIva?: boolean;
+  porcentajeIva?: number;
 }
 
 export default function OrderPage() {
@@ -39,11 +46,13 @@ export default function OrderPage() {
           endDate: "",
           rating: 5,
           reviews: 0,
-          description: "",
-          includes: [],
+          description: reserva.plan?.descripcion || "",
+          includes: Array.isArray(reserva.plan?.incluye) ? reserva.plan.incluye : [],
           amenities: [],
           highlighted: false,
           isOffer: false,
+          providerPhone: reserva.plan?.contactoCelular || undefined,
+          providerEmail: reserva.plan?.contactoEmail || undefined,
           disponibilidad: null,
         } as Plan;
 
@@ -51,6 +60,13 @@ export default function OrderPage() {
           plan: pseudoPlan,
           numTourists: reserva.numPersonas,
           reservationCode: reserva.codigo,
+          turistas: Array.isArray(reserva.turistas) ? reserva.turistas : [],
+          subtotal: Number(reserva.subtotal),
+          impuestos: Number(reserva.impuestos),
+          total: Number(reserva.total),
+          selectedDate: reserva.datosFacturacion?.selectedDate || null,
+          cobrarIva: reserva.datosFacturacion?.cobrarIva ?? false,
+          porcentajeIva: reserva.datosFacturacion?.porcentajeIva ?? 19,
         });
         setLoading(false);
       })
@@ -81,6 +97,13 @@ export default function OrderPage() {
           plan={displayData.plan}
           numTourists={displayData.numTourists}
           reservationCode={displayData.reservationCode}
+          turistas={displayData.turistas || []}
+          subtotal={displayData.subtotal || 0}
+          impuestos={displayData.impuestos || 0}
+          total={displayData.total || 0}
+          selectedDate={displayData.selectedDate}
+          cobrarIva={displayData.cobrarIva}
+          porcentajeIva={displayData.porcentajeIva}
         />
       </div>
     </div>

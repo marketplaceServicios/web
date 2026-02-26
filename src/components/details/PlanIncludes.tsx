@@ -17,16 +17,14 @@ export default function PlanIncludes({ plan, selectedDate, selectedPrice }: Plan
       minimumFractionDigits: 0,
     }).format(price);
 
-  const formatReadableDate = (iso: string) => {
-    const [y, m, d] = iso.split("-").map(Number);
-    const date = new Date(y, m - 1, d);
-    return date.toLocaleDateString("es-CO", {
+  const formatReadableDate = (iso: string) =>
+    new Intl.DateTimeFormat("es-CO", {
       weekday: "long",
       day: "numeric",
       month: "long",
       year: "numeric",
-    });
-  };
+      timeZone: "UTC",
+    }).format(new Date(`${iso}T12:00:00Z`));
 
   const activePrice = selectedDate && selectedPrice != null ? selectedPrice : plan.price;
   const reservaHref = selectedDate

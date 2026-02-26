@@ -46,6 +46,10 @@ function mapPlan(p: any): Plan {
     highlighted: p.destacado || false,
     isOffer: p.esOferta || false,
     datoClave: p.datoClave || undefined,
+    providerPhone: p.contactoCelular || undefined,
+    providerEmail: p.contactoEmail || undefined,
+    cobrarIva: p.cobrarIva ?? false,
+    porcentajeIva: p.porcentajeIva ?? 19,
     disponibilidad: p.disponibilidad || null,
   };
 }
@@ -109,6 +113,14 @@ export async function createContacto(body: {
     method: "POST",
     body: JSON.stringify(body),
   });
+}
+
+export async function getPlanFechasLlenas(planId: string): Promise<string[]> {
+  try {
+    return await request<string[]>(`/planes/${planId}/fechas-llenas`);
+  } catch {
+    return [];
+  }
 }
 
 export async function createCotizacion(body: {

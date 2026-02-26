@@ -8,11 +8,12 @@ interface PriceCalendarProps {
   disponibilidad?: Plan["disponibilidad"];
   selectedDate?: string | null;
   onDateSelect?: (isoDate: string, price: number) => void;
+  fechasLlenas?: string[];
 }
 
 type DayStatus = "available" | "special" | "unavailable" | "past";
 
-export default function PriceCalendar({ price, disponibilidad, selectedDate, onDateSelect }: PriceCalendarProps) {
+export default function PriceCalendar({ price, disponibilidad, selectedDate, onDateSelect, fechasLlenas = [] }: PriceCalendarProps) {
   const today = new Date();
   today.setHours(0, 0, 0, 0);
 
@@ -51,6 +52,9 @@ export default function PriceCalendar({ price, disponibilidad, selectedDate, onD
     const date = new Date(currentDate.getFullYear(), currentDate.getMonth(), day);
 
     if (date < today) return { status: "past", price };
+
+    const isoDay = `${date.getFullYear()}-${String(date.getMonth() + 1).padStart(2, "0")}-${String(day).padStart(2, "0")}`;
+    if (fechasLlenas.includes(isoDay)) return { status: "unavailable", price };
 
     if (!disponibilidad || disponibilidad.tipo === "siempre") {
       const dow = date.getDay();
