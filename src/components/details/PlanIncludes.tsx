@@ -2,6 +2,7 @@ import { Link } from "react-router-dom";
 import { Plan } from "@/data/mockData";
 import { Button } from "@/components/ui/button";
 import { Check, CalendarCheck, CalendarX } from "lucide-react";
+import { handleImgError } from "@/lib/imageUtils";
 
 interface PlanIncludesProps {
   plan: Plan;
@@ -39,6 +40,7 @@ export default function PlanIncludes({ plan, selectedDate, selectedPrice }: Plan
           src={plan.image}
           alt={plan.title}
           className="w-full h-full object-cover"
+          onError={handleImgError}
         />
         <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent" />
         <div className="absolute bottom-4 left-4 right-4">

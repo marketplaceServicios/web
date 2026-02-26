@@ -7,6 +7,8 @@ import DetailsPage from "./pages/DetailsPage";
 import ReservationPage from "./pages/ReservationPage";
 import OrderPage from "./pages/OrderPage";
 import ContactPage from "./pages/ContactPage";
+import Experiencias360Page from "./pages/Experiencias360Page";
+import SearchPage from "./pages/SearchPage";
 
 function App() {
   return (
@@ -15,7 +17,10 @@ function App() {
         <Routes>
           <Route path="/" element={<HomePage />} />
           <Route path="/planes" element={<PlansPage />} />
+          <Route path="/planes/categoria/:slug" element={<PlansPage />} />
           <Route path="/categorias" element={<CategoriesPage />} />
+          <Route path="/experiencias-360" element={<Experiencias360Page />} />
+          <Route path="/buscar" element={<SearchPage />} />
           <Route path="/planes/:id" element={<DetailsPage />} />
           <Route path="/reserva/:id" element={<ReservationPage />} />
           <Route path="/orden" element={<OrderPage />} />

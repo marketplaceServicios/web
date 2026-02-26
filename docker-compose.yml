@@ -1,8 +1,7 @@
 services:
   frontend:
-    build:
-      context: .
-      dockerfile: Dockerfile
+    image: ghcr.io/marketplaceservicios/vive-silver-frontend:latest
+    pull_policy: always
     container_name: vive-silver-frontend
     restart: always
     networks:

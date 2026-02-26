@@ -38,6 +38,7 @@ export default function OrderPage() {
           title: reserva.plan?.titulo || "",
           location: reserva.plan?.ubicacion || "",
           category: reserva.plan?.categoria?.nombre || "",
+          categoryId: String(reserva.plan?.categoriaId || ""),
           image: (reserva.plan?.imagenes || [])[0] || "",
           images: reserva.plan?.imagenes || [],
           price: Number(reserva.subtotal) / reserva.numPersonas,

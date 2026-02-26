@@ -171,7 +171,7 @@ export default function ReservationPage() {
               <div className="flex items-center justify-between">
                 <div>
                   <h3 className="font-semibold text-primary">
-                    Número de viajeros
+                    Número de personas
                   </h3>
                   <p className="text-sm text-stormy">
                     Selecciona la cantidad de personas

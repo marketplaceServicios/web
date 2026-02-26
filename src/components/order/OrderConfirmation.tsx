@@ -6,6 +6,7 @@ import {
   CheckCircle, Users, MapPin, Copy, Calendar,
   Download, Phone, Mail, CreditCard, User,
 } from "lucide-react";
+import { handleImgError } from "@/lib/imageUtils";
 import { useState } from "react";
 
 const DOC_LABELS: Record<string, string> = {
