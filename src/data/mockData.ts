@@ -31,6 +31,10 @@ export interface Plan {
   providerName?: string;
   providerLogo?: string;
   datoClave?: string;
+  providerPhone?: string;
+  providerEmail?: string;
+  cobrarIva?: boolean;
+  porcentajeIva?: number;
   disponibilidad?: {
     tipo: 'siempre' | 'dias_semana' | 'fechas_especificas';
     diasSemana?: number[];

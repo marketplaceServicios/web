@@ -1,7 +1,7 @@
 import { Plan, paymentMethods } from "@/data/mockData";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { MapPin, Users, CalendarCheck } from "lucide-react";
+import { MapPin, Users, CalendarCheck, AlertCircle } from "lucide-react";
 
 interface OrderSummaryProps {
   plan: Plan;
@@ -10,6 +10,7 @@ interface OrderSummaryProps {
   onPaymentChange: (method: string) => void;
   onSubmit: () => void;
   submitting?: boolean;
+  formValid?: boolean;
   selectedPrice?: number | null;
   selectedDate?: string | null;
 }
@@ -21,6 +22,7 @@ export default function OrderSummary({
   onPaymentChange,
   onSubmit,
   submitting = false,
+  formValid = false,
   selectedPrice,
   selectedDate,
 }: OrderSummaryProps) {
@@ -31,19 +33,20 @@ export default function OrderSummary({
       minimumFractionDigits: 0,
     }).format(price);
 
-  const formatDate = (iso: string) => {
-    const [y, m, d] = iso.split("-").map(Number);
-    return new Date(y, m - 1, d).toLocaleDateString("es-CO", {
+  const formatDate = (iso: string) =>
+    new Intl.DateTimeFormat("es-CO", {
       weekday: "long",
       day: "numeric",
       month: "long",
       year: "numeric",
-    });
-  };
+      timeZone: "UTC",
+    }).format(new Date(`${iso}T12:00:00Z`));
 
+  const cobrarIva = plan.cobrarIva ?? false;
+  const porcentajeIva = plan.porcentajeIva ?? 19;
   const unitPrice = selectedPrice ?? plan.price;
   const subtotal = unitPrice * numTourists;
-  const tax = subtotal * 0.19;
+  const tax = cobrarIva ? subtotal * (porcentajeIva / 100) : 0;
   const total = subtotal + tax;
 
   return (
@@ -88,10 +91,12 @@ export default function OrderSummary({
             </span>
             <span>{formatPrice(subtotal)}</span>
           </div>
-          <div className="flex justify-between text-sm">
-            <span className="text-stormy">Impuestos (19%)</span>
-            <span>{formatPrice(tax)}</span>
-          </div>
+          {cobrarIva && (
+            <div className="flex justify-between text-sm">
+              <span className="text-stormy">IVA ({porcentajeIva}%)</span>
+              <span>{formatPrice(tax)}</span>
+            </div>
+          )}
           <div className="flex justify-between font-bold text-lg border-t pt-2">
             <span>TOTAL</span>
             <span className="text-golden">{formatPrice(total)}</span>
@@ -126,9 +131,23 @@ export default function OrderSummary({
         </div>
 
         {/* Submit Button */}
-        <Button className="w-full" size="lg" onClick={onSubmit} disabled={submitting}>
+        <Button
+          className="w-full"
+          size="lg"
+          onClick={onSubmit}
+          disabled={submitting || !formValid}
+        >
           {submitting ? "Procesando..." : "Confirmar y continuar"}
         </Button>
+
+        {!formValid && (
+          <div className="flex items-start gap-2 rounded-lg bg-amber-50 border border-amber-200 px-3 py-2.5">
+            <AlertCircle className="w-4 h-4 text-amber-600 flex-shrink-0 mt-0.5" />
+            <p className="text-xs text-amber-800 leading-snug">
+              Completa todos los campos obligatorios del formulario para activar este botón.
+            </p>
+          </div>
+        )}
 
         <p className="text-xs text-stormy text-center">
           Tu información está protegida. Solo la usamos para gestionar tu reserva.

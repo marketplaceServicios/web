@@ -18,6 +18,7 @@ export default function ReservationPage() {
   const [plan, setPlan] = useState<Plan | null>(null);
   const [loading, setLoading] = useState(true);
   const [submitting, setSubmitting] = useState(false);
+  const [reservaCreada, setReservaCreada] = useState<{ codigo: string; checkoutUrl: string } | null>(null);
 
   const [numTourists, setNumTourists] = useState(1);
   const [tourists, setTourists] = useState([
@@ -31,9 +32,14 @@ export default function ReservationPage() {
     companyName: "",
   });
   const [contact, setContact] = useState({
+    name: "",
+    documentType: "",
+    documentNumber: "",
     email: "",
     countryCode: "+57",
     phone: "",
+    alternateContact: "",
+    specialNeeds: "",
   });
   const [selectedPayment, setSelectedPayment] = useState("credit");
 
@@ -55,6 +61,20 @@ export default function ReservationPage() {
   if (!plan) {
     return <Navigate to="/planes" replace />;
   }
+
+  const isFormValid =
+    tourists.every(
+      (t) => t.name.trim() && t.birthDate && t.documentType && t.documentNumber.trim()
+    ) &&
+    billing.address.trim() !== "" &&
+    billing.city.trim() !== "" &&
+    billing.phone.trim() !== "" &&
+    contact.name.trim() !== "" &&
+    contact.documentType !== "" &&
+    contact.documentNumber.trim() !== "" &&
+    contact.email.trim() !== "" &&
+    contact.phone.trim() !== "" &&
+    contact.alternateContact.trim() !== "";
 
   const handleAddTourist = () => {
     setNumTourists(numTourists + 1);
@@ -78,15 +98,60 @@ export default function ReservationPage() {
         planId: plan.id,
         numPersonas: numTourists,
         turistas: tourists,
-        datosFacturacion: { ...billing, ...contact },
+        datosFacturacion: { ...billing, ...contact, selectedDate },
         metodoPago: selectedPayment,
       });
-      window.location.href = result.checkoutUrl;
-    } catch {
+      if (import.meta.env.DEV) {
+        setReservaCreada({ codigo: result.reserva.codigo, checkoutUrl: result.checkoutUrl });
+        setSubmitting(false);
+      } else {
+        window.location.href = result.checkoutUrl;
+      }
+    } catch (err: any) {
       setSubmitting(false);
-      alert("Ocurrió un error al procesar tu reserva. Por favor intenta de nuevo.");
+      alert(err.message || "Ocurrió un error al procesar tu reserva. Por favor intenta de nuevo.");
     }
   };
+
+  const handleSimularPago = async () => {
+    if (!reservaCreada) return;
+    setSubmitting(true);
+    try {
+      await fetch(`http://localhost:4000/api/reservas/simular-pago/${reservaCreada.codigo}`, { method: 'POST' });
+      window.location.href = `/orden?codigo=${reservaCreada.codigo}`;
+    } catch {
+      setSubmitting(false);
+      alert("Error al simular el pago");
+    }
+  };
+
+  if (reservaCreada) {
+    return (
+      <div className="bg-cream min-h-screen flex items-center justify-center py-8">
+        <div className="bg-white rounded-xl border border-cream shadow-sm p-8 max-w-md w-full text-center space-y-4">
+          <div className="text-4xl">🧪</div>
+          <h2 className="text-xl font-bold text-primary">Reserva creada en modo desarrollo</h2>
+          <p className="text-sm text-stormy">Código: <span className="font-mono font-bold">{reservaCreada.codigo}</span></p>
+          <p className="text-xs text-stormy/70">¿Cómo quieres continuar?</p>
+          <div className="flex flex-col gap-3 pt-2">
+            <button
+              onClick={handleSimularPago}
+              disabled={submitting}
+              className="w-full bg-primary text-white py-3 rounded-lg font-medium hover:bg-primary/90 transition-colors"
+            >
+              ✅ Simular pago aprobado
+            </button>
+            <a
+              href={reservaCreada.checkoutUrl}
+              className="w-full block border border-primary text-primary py-3 rounded-lg font-medium hover:bg-primary/5 transition-colors"
+            >
+              💳 Ir al checkout de Wompi
+            </a>
+          </div>
+        </div>
+      </div>
+    );
+  }
 
   return (
     <div className="bg-cream min-h-screen py-8">
@@ -154,6 +219,7 @@ export default function ReservationPage() {
               onPaymentChange={setSelectedPayment}
               onSubmit={handleSubmit}
               submitting={submitting}
+              formValid={isFormValid}
               selectedDate={selectedDate}
               selectedPrice={selectedPrice}
             />
