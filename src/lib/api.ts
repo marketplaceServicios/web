@@ -39,8 +39,8 @@ function mapPlan(p: any): Plan {
     endDate: p.fechaFin ? p.fechaFin.split("T")[0] : today,
     image: (p.imagenes || [])[0] || "",
     images: p.imagenes || [],
-    rating: 5.0,
-    reviews: 0,
+    rating: p._rating ?? 0,
+    reviews: p._reviewCount ?? 0,
     description: p.descripcion || "",
     includes: p.incluye || [],
     amenities: p.amenidades || [],
@@ -230,6 +230,42 @@ export async function createCotizacion(body: {
   numPersonas?: number;
 }) {
   return request("/cotizaciones", {
+    method: "POST",
+    body: JSON.stringify(body),
+  });
+}
+
+// --- Reseñas ---
+
+export interface ReviewData {
+  id: number;
+  planId: number;
+  nombre: string;
+  email: string;
+  rating: number;
+  comentario: string;
+  createdAt: string;
+}
+
+export interface ReviewsResponse {
+  resenas: ReviewData[];
+  rating: number;
+  total: number;
+}
+
+export async function getReviewsForPlan(planId: string): Promise<ReviewsResponse> {
+  return request(`/resenas/plan/${planId}`);
+}
+
+export async function createReview(body: {
+  planId: string;
+  nombre: string;
+  email: string;
+  rating: number;
+  comentario: string;
+  captchaToken?: string;
+}): Promise<{ message: string }> {
+  return request("/resenas", {
     method: "POST",
     body: JSON.stringify(body),
   });

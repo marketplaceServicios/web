@@ -8,6 +8,7 @@ import Amenities from "@/components/details/Amenities";
 import PriceCalendar from "@/components/details/PriceCalendar";
 import PlanIncludes from "@/components/details/PlanIncludes";
 import QuoteForm from "@/components/details/QuoteForm";
+import ReviewSection from "@/components/details/ReviewSection";
 import { FALLBACK_IMAGE } from "@/lib/imageUtils";
 
 export default function DetailsPage() {
@@ -89,6 +90,9 @@ export default function DetailsPage() {
 
               {/* Quote Form */}
               <QuoteForm planId={plan.id} planTitle={plan.title} />
+
+              {/* Reviews */}
+              <ReviewSection planId={plan.id} />
             </div>
 
             {/* Sidebar */}

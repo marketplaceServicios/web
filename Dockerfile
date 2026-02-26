@@ -12,9 +12,11 @@ RUN npm ci
 # Copy source code
 COPY . .
 
-# Set API URL for production build
+# Set env vars for production build
 ARG VITE_API_URL=https://api.vivesilver.com/api
+ARG VITE_HCAPTCHA_SITE_KEY=49a4b608-36e8-4e3c-88de-eef2bd9ad1c0
 ENV VITE_API_URL=$VITE_API_URL
+ENV VITE_HCAPTCHA_SITE_KEY=$VITE_HCAPTCHA_SITE_KEY
 
 # Build the app
 RUN npm run build
