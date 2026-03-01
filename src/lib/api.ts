@@ -233,6 +233,17 @@ export async function getPlanFechasLlenas(planId: string): Promise<string[]> {
   }
 }
 
+export async function getPlanCupos(
+  planId: string,
+  fecha: string
+): Promise<{ cupoMaximo: number | null; personasReservadas: number; cuposDisponibles: number | null }> {
+  try {
+    return await request(`/planes/${planId}/cupos?fecha=${fecha}`);
+  } catch {
+    return { cupoMaximo: null, personasReservadas: 0, cuposDisponibles: null };
+  }
+}
+
 export async function createCotizacion(body: {
   planId: string;
   nombre: string;

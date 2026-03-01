@@ -143,6 +143,7 @@ export default function OrderConfirmation({
       <div class="name">Turista ${i + 1}: ${t.name || "—"}</div>
       ${t.documentType || t.documentNumber ? `<div class="doc">${docLabel(t.documentType, t.documentNumber)}</div>` : ""}
       ${t.birthDate ? `<div class="doc">Nacimiento: ${formatDate(t.birthDate)} · ${calcAge(t.birthDate)} años</div>` : ""}
+      ${t.city ? `<div class="doc">Ciudad: ${t.city}</div>` : ""}
     </div>`
       )
       .join("")}
@@ -309,6 +310,11 @@ export default function OrderConfirmation({
                     {t.birthDate && (
                       <p className="text-stormy/60 text-xs mt-0.5">
                         Nac. {formatDate(t.birthDate)} · <span className="font-medium text-stormy/80">{calcAge(t.birthDate)} años</span>
+                      </p>
+                    )}
+                    {t.city && (
+                      <p className="text-stormy/60 text-xs mt-0.5">
+                        Ciudad de residencia: <span className="font-medium text-stormy/80">{t.city}</span>
                       </p>
                     )}
                   </div>
