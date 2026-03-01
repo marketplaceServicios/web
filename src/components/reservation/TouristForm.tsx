@@ -8,6 +8,7 @@ interface Tourist {
   birthDate: string;
   documentType: string;
   documentNumber: string;
+  city: string;
 }
 
 interface TouristFormProps {
@@ -33,7 +34,7 @@ export default function TouristForm({ tourists, onChange }: TouristFormProps) {
       <CardContent className="space-y-6">
         {tourists.map((tourist, index) => (
           <div key={index} className="p-4 bg-cream rounded-lg space-y-4">
-            <h4 className="font-medium text-forest">Turista {index + 1}</h4>
+            <h4 className="font-medium text-forest">Usuario {index + 1}</h4>
             <div className="grid md:grid-cols-2 gap-4">
               <div>
                 <Label htmlFor={`name-${index}`}>Nombre completo</Label>
@@ -83,6 +84,16 @@ export default function TouristForm({ tourists, onChange }: TouristFormProps) {
                     updateTourist(index, "documentNumber", e.target.value)
                   }
                   placeholder="1234567890"
+                  required
+                />
+              </div>
+              <div className="md:col-span-2">
+                <Label htmlFor={`city-${index}`}>Ciudad de residencia</Label>
+                <Input
+                  id={`city-${index}`}
+                  value={tourist.city}
+                  onChange={(e) => updateTourist(index, "city", e.target.value)}
+                  placeholder="Ej: Medellín"
                   required
                 />
               </div>

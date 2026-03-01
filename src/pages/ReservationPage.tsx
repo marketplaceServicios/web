@@ -1,13 +1,13 @@
 import { useState, useEffect } from "react";
-import { useParams, Navigate, useSearchParams } from "react-router-dom";
-import { getPlanById, createReservation } from "@/lib/api";
+import { useParams, Navigate, useSearchParams, Link } from "react-router-dom";
+import { getPlanById, createReservation, getPlanCupos } from "@/lib/api";
 import type { Plan } from "@/data/mockData";
 import TouristForm from "@/components/reservation/TouristForm";
 import BillingForm from "@/components/reservation/BillingForm";
 import ContactForm from "@/components/reservation/ContactForm";
 import OrderSummary from "@/components/reservation/OrderSummary";
 import { Button } from "@/components/ui/button";
-import { Plus, Minus } from "lucide-react";
+import { Plus, Minus, AlertTriangle } from "lucide-react";
 
 export default function ReservationPage() {
   const { id } = useParams<{ id: string }>();
@@ -22,8 +22,9 @@ export default function ReservationPage() {
 
   const [numTourists, setNumTourists] = useState(1);
   const [tourists, setTourists] = useState([
-    { name: "", birthDate: "", documentType: "", documentNumber: "" },
+    { name: "", birthDate: "", documentType: "", documentNumber: "", city: "" },
   ]);
+  const [cuposDisponibles, setCuposDisponibles] = useState<number | null>(null);
   const [billing, setBilling] = useState({
     address: "",
     city: "",
@@ -50,6 +51,12 @@ export default function ReservationPage() {
       .catch(() => setLoading(false));
   }, [id]);
 
+  // Consultar cupos disponibles cuando hay fecha seleccionada
+  useEffect(() => {
+    if (!id || !selectedDate) { setCuposDisponibles(null); return; }
+    getPlanCupos(id, selectedDate).then(({ cuposDisponibles: c }) => setCuposDisponibles(c));
+  }, [id, selectedDate]);
+
   if (loading) {
     return (
       <div className="min-h-screen bg-cream flex items-center justify-center">
@@ -64,7 +71,7 @@ export default function ReservationPage() {
 
   const isFormValid =
     tourists.every(
-      (t) => t.name.trim() && t.birthDate && t.documentType && t.documentNumber.trim()
+      (t) => t.name.trim() && t.birthDate && t.documentType && t.documentNumber.trim() && t.city.trim()
     ) &&
     billing.address.trim() !== "" &&
     billing.city.trim() !== "" &&
@@ -80,7 +87,7 @@ export default function ReservationPage() {
     setNumTourists(numTourists + 1);
     setTourists([
       ...tourists,
-      { name: "", birthDate: "", documentType: "", documentNumber: "" },
+      { name: "", birthDate: "", documentType: "", documentNumber: "", city: "" },
     ]);
   };
 
@@ -167,7 +174,7 @@ export default function ReservationPage() {
           {/* Forms */}
           <div className="lg:col-span-2 space-y-6">
             {/* Tourist Count */}
-            <div className="bg-white rounded-xl p-6 border">
+            <div className="bg-white rounded-xl p-6 border space-y-4">
               <div className="flex items-center justify-between">
                 <div>
                   <h3 className="font-semibold text-primary">
@@ -193,11 +200,43 @@ export default function ReservationPage() {
                     variant="outline"
                     size="icon"
                     onClick={handleAddTourist}
+                    disabled={cuposDisponibles !== null && numTourists >= cuposDisponibles}
                   >
                     <Plus className="w-4 h-4" />
                   </Button>
                 </div>
               </div>
+
+              {/* Aviso de cupo lleno para esta fecha */}
+              {cuposDisponibles !== null && numTourists >= cuposDisponibles && (
+                <div className="flex items-start gap-3 rounded-lg border border-amber-200 bg-amber-50 px-4 py-3">
+                  <AlertTriangle className="w-4 h-4 text-amber-500 flex-shrink-0 mt-0.5" />
+                  <div className="space-y-1">
+                    <p className="text-sm font-semibold text-amber-800">
+                      {cuposDisponibles === 0
+                        ? "Esta fecha ya no tiene cupos disponibles."
+                        : `Has llegado al límite de ${cuposDisponibles} persona${cuposDisponibles !== 1 ? "s" : ""} disponible${cuposDisponibles !== 1 ? "s" : ""} para esta fecha.`}
+                    </p>
+                    <p className="text-xs text-amber-700 leading-relaxed">
+                      Este plan tiene un cupo máximo por día que ya se ha cubierto con tu selección.
+                      Si deseas ir con más personas,{" "}
+                      <Link
+                        to={`/planes/${id}#cotizar`}
+                        className="underline font-medium hover:text-amber-900"
+                      >
+                        diligencia el formulario de cotización
+                      </Link>{" "}
+                      contándonos tu caso, o{" "}
+                      <Link
+                        to={`/planes/${id}`}
+                        className="underline font-medium hover:text-amber-900"
+                      >
+                        elige otra fecha
+                      </Link>.
+                    </p>
+                  </div>
+                </div>
+              )}
             </div>
 
             {/* Tourist Data */}
@@ -219,7 +258,7 @@ export default function ReservationPage() {
               onPaymentChange={setSelectedPayment}
               onSubmit={handleSubmit}
               submitting={submitting}
-              formValid={isFormValid}
+              formValid={isFormValid && (cuposDisponibles === null || numTourists <= cuposDisponibles)}
               selectedDate={selectedDate}
               selectedPrice={selectedPrice}
             />
