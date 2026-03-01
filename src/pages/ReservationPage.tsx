@@ -26,8 +26,13 @@ export default function ReservationPage() {
   ]);
   const [cuposDisponibles, setCuposDisponibles] = useState<number | null>(null);
   const [billing, setBilling] = useState({
+    titularNombre: "",
+    titularDocTipo: "",
+    titularDocNum: "",
+    titularEmail: "",
     address: "",
     city: "",
+    departamento: "",
     phone: "",
     nit: "",
     companyName: "",
@@ -73,8 +78,13 @@ export default function ReservationPage() {
     tourists.every(
       (t) => t.name.trim() && t.birthDate && t.documentType && t.documentNumber.trim() && t.city.trim()
     ) &&
+    billing.titularNombre.trim() !== "" &&
+    billing.titularDocTipo !== "" &&
+    billing.titularDocNum.trim() !== "" &&
+    billing.titularEmail.trim() !== "" &&
     billing.address.trim() !== "" &&
     billing.city.trim() !== "" &&
+    billing.departamento.trim() !== "" &&
     billing.phone.trim() !== "" &&
     contact.name.trim() !== "" &&
     contact.documentType !== "" &&

@@ -216,6 +216,7 @@ export async function createContacto(body: {
   nombre: string;
   email: string;
   celular: string;
+  celularAdicional?: string;
   mensaje: string;
   preferenciaContacto?: string;
 }): Promise<void> {

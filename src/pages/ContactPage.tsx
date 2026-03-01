@@ -10,6 +10,7 @@ export default function ContactPage() {
   const [formData, setFormData] = useState({
     name: "",
     phone: "",
+    phoneAlt: "",
     email: "",
     message: "",
     contactPreference: "whatsapp",
@@ -27,11 +28,12 @@ export default function ContactPage() {
         nombre: formData.name,
         email: formData.email,
         celular: formData.phone,
+        celularAdicional: formData.phoneAlt || undefined,
         mensaje: formData.message,
         preferenciaContacto: formData.contactPreference,
       });
       setEnviado(true);
-      setFormData({ name: "", phone: "", email: "", message: "", contactPreference: "whatsapp" });
+      setFormData({ name: "", phone: "", phoneAlt: "", email: "", message: "", contactPreference: "whatsapp" });
     } catch {
       setError("No pudimos enviar tu mensaje. Por favor intenta de nuevo.");
     } finally {
@@ -106,6 +108,19 @@ export default function ContactPage() {
                     }
                     placeholder="+57 300 123 4567"
                     required
+                  />
+                </div>
+
+                <div>
+                  <Label htmlFor="phoneAlt">Teléfono de contacto adicional <span className="text-gray-400 font-normal">(opcional)</span></Label>
+                  <Input
+                    id="phoneAlt"
+                    type="tel"
+                    value={formData.phoneAlt}
+                    onChange={(e) =>
+                      setFormData({ ...formData, phoneAlt: e.target.value })
+                    }
+                    placeholder="+57 310 987 6543"
                   />
                 </div>
 
