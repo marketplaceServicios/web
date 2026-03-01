@@ -51,7 +51,7 @@ export default function PriceCalendar({ price, disponibilidad, selectedDate, onD
   const getDayInfo = (day: number): { status: DayStatus; price: number } => {
     const date = new Date(currentDate.getFullYear(), currentDate.getMonth(), day);
 
-    if (date < today) return { status: "past", price };
+    if (date <= today) return { status: "past", price };
 
     const isoDay = `${date.getFullYear()}-${String(date.getMonth() + 1).padStart(2, "0")}-${String(day).padStart(2, "0")}`;
     if (fechasLlenas.includes(isoDay)) return { status: "unavailable", price };
