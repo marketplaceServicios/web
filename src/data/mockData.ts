@@ -41,6 +41,7 @@ export interface Plan {
     precioFinDeSemana?: number | null;
     fechasEspeciales?: { fecha: string; precio: number }[];
   } | null;
+  cupoMaximoDiario?: number;
 }
 
 export interface Testimonial {

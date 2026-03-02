@@ -54,6 +54,7 @@ function mapPlan(p: any): Plan {
     cobrarIva: p.cobrarIva ?? false,
     porcentajeIva: p.porcentajeIva ?? 19,
     disponibilidad: p.disponibilidad || null,
+    cupoMaximoDiario: p.cupoMaximoDiario ?? undefined,
   };
 }
 
