@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { useParams, Navigate } from "react-router-dom";
-import { getPlanById, getPlanFechasLlenas } from "@/lib/api";
+import { getPlanById, getPlanFechasLlenas, getPlanCupos } from "@/lib/api";
 import type { Plan } from "@/data/mockData";
 import ImageGallery from "@/components/details/ImageGallery";
 import ServiceInfo from "@/components/details/ServiceInfo";
@@ -18,10 +18,16 @@ export default function DetailsPage() {
   const [selectedDate, setSelectedDate] = useState<string | null>(null);
   const [selectedPrice, setSelectedPrice] = useState<number>(0);
   const [fechasLlenas, setFechasLlenas] = useState<string[]>([]);
+  const [cuposInfo, setCuposInfo] = useState<{
+    cupoMaximo: number | null;
+    personasReservadas: number;
+    cuposDisponibles: number | null;
+  } | null>(null);
 
   const handleDateSelect = (isoDate: string, price: number) => {
     setSelectedDate(isoDate);
     setSelectedPrice(price);
+    if (id) getPlanCupos(id, isoDate).then(setCuposInfo);
   };
 
   useEffect(() => {
@@ -92,6 +98,7 @@ export default function DetailsPage() {
                 selectedDate={selectedDate}
                 onDateSelect={handleDateSelect}
                 fechasLlenas={fechasLlenas}
+                cuposInfo={cuposInfo}
               />
 
               {/* Quote Form */}

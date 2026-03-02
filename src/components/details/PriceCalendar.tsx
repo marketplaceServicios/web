@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { ChevronLeft, ChevronRight } from "lucide-react";
+import { ChevronLeft, ChevronRight, Users } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import type { Plan } from "@/data/mockData";
 
@@ -9,11 +9,16 @@ interface PriceCalendarProps {
   selectedDate?: string | null;
   onDateSelect?: (isoDate: string, price: number) => void;
   fechasLlenas?: string[];
+  cuposInfo?: {
+    cupoMaximo: number | null;
+    personasReservadas: number;
+    cuposDisponibles: number | null;
+  } | null;
 }
 
 type DayStatus = "available" | "special" | "unavailable" | "past";
 
-export default function PriceCalendar({ price, disponibilidad, selectedDate, onDateSelect, fechasLlenas = [] }: PriceCalendarProps) {
+export default function PriceCalendar({ price, disponibilidad, selectedDate, onDateSelect, fechasLlenas = [], cuposInfo }: PriceCalendarProps) {
   const today = new Date();
   today.setHours(0, 0, 0, 0);
 
@@ -215,6 +220,27 @@ export default function PriceCalendar({ price, disponibilidad, selectedDate, onD
           <span>No disponible</span>
         </div>
       </div>
+
+      {/* Cupos disponibles */}
+      {selectedDate && cuposInfo?.cupoMaximo && (
+        <div
+          className={`mt-4 flex items-center gap-2 px-3 py-2 rounded-lg text-sm
+            ${cuposInfo.cuposDisponibles === 0
+              ? "bg-red-50 text-red-700"
+              : cuposInfo.cuposDisponibles !== null && cuposInfo.cuposDisponibles <= 3
+              ? "bg-amber-50 text-amber-700"
+              : "bg-sage/10 text-sage"
+            }`}
+        >
+          <Users className="w-4 h-4 flex-shrink-0" />
+          {cuposInfo.cuposDisponibles === 0
+            ? "Sin cupos disponibles para esta fecha"
+            : cuposInfo.cuposDisponibles !== null
+            ? `${cuposInfo.cuposDisponibles} cupo${cuposInfo.cuposDisponibles !== 1 ? "s" : ""} disponible${cuposInfo.cuposDisponibles !== 1 ? "s" : ""} para esta fecha`
+            : `${cuposInfo.personasReservadas} persona${cuposInfo.personasReservadas !== 1 ? "s" : ""} reservada${cuposInfo.personasReservadas !== 1 ? "s" : ""}`
+          }
+        </div>
+      )}
     </div>
   );
 }

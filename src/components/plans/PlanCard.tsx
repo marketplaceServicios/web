@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
 import { Plan } from "@/data/mockData";
-import { MapPin, Building2 } from "lucide-react";
+import { MapPin, Building2, Users } from "lucide-react";
 import { handleImgError } from "@/lib/imageUtils";
 
 interface PlanCardProps {
@@ -95,6 +95,14 @@ export default function PlanCard({ plan }: PlanCardProps) {
           </span>
           <span className="text-xs text-stormy ml-1">/ persona</span>
         </div>
+
+        {/* Cupo máximo */}
+        {plan.cupoMaximoDiario && (
+          <div className="flex items-center gap-1 text-xs text-stormy/60">
+            <Users className="w-3 h-3" />
+            <span>Hasta {plan.cupoMaximoDiario} personas / día</span>
+          </div>
+        )}
       </div>
     </Link>
   );
