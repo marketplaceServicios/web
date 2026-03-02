@@ -36,10 +36,7 @@ export default function PriceCalendar({ price, disponibilidad, selectedDate, onD
       maximumFractionDigits: 0,
     }).format(p);
 
-  const formatShort = (p: number) => {
-    if (p >= 1_000_000) return `${(p / 1_000_000).toFixed(1)}M`;
-    return `${Math.round(p / 1000)}k`;
-  };
+  const formatShort = (p: number) => `$${p.toLocaleString("es-CO")}`;
 
   const monthNames = [
     "Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio",
