@@ -327,7 +327,7 @@ export default function PlansPage() {
                 categor&iacute;a o escr&iacute;benos y te orientamos.
               </p>
               <a
-                href="https://wa.me/573001234567"
+                href="https://wa.me/573116606105"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="inline-flex items-center px-6 py-3 bg-golden text-white rounded-lg font-medium hover:bg-golden/90 transition-colors"

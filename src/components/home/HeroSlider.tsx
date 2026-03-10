@@ -101,7 +101,7 @@ export default function HeroSlider() {
                   </Button>
                 </Link>
                 <a
-                  href="https://wa.me/573001234567"
+                  href="https://wa.me/573116606105"
                   target="_blank"
                   rel="noopener noreferrer"
                 >

@@ -91,7 +91,7 @@ export default function Footer() {
             <h3 className="font-serif text-lg mb-4">Contacto</h3>
             <div className="space-y-3">
               <a
-                href="https://wa.me/573001234567"
+                href="https://wa.me/573116606105"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="flex items-center space-x-2 text-cream/70 hover:text-golden transition-colors text-sm"

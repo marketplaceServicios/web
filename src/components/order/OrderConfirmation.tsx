@@ -393,6 +393,17 @@ export default function OrderConfirmation({
             Volver a planes
           </Button>
         </Link>
+        <p className="text-stormy text-sm">
+          ¿Prefieres hablar ahora?{" "}
+          <a
+            href="https://wa.me/573116606105"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="text-golden font-medium hover:underline"
+          >
+            Escríbenos por WhatsApp.
+          </a>
+        </p>
       </div>
     </div>
   );
